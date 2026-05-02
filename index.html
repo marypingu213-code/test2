@@ -84,8 +84,8 @@
 
         /* 網格與佈局 */
         .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 30px; width: 100%; }
+        .grid-3x3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; }
         
-        /* Slide 5 定義方塊優化：彩色且更大 */
         .def-container { display: flex; gap: 40px; justify-content: center; width: 100%; }
         .def-box {
             background: white; border: 5px solid var(--accent-color); border-radius: 40px;
@@ -105,6 +105,15 @@
         .highlight-box { background: var(--accent-color); padding: 50px; border-radius: 40px; border: 4px dashed var(--primary-color); font-size: 38px; line-height: 1.6; width: 100%; }
         .bold-border { border: 12px solid var(--primary-color); background: white; padding: 50px; border-radius: 40px; text-align: center; }
         
+        /* 教育實例專用樣式 */
+        .edu-example {
+            margin-top: 30px; background: white; padding: 25px; border-radius: 20px; 
+            border-left: 8px solid var(--secondary-color); box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .edu-example p {
+            font-size: 30px; margin: 0; color: var(--primary-color); line-height: 1.5;
+        }
+
         ul { list-style: none; padding: 0; }
         li { font-size: 38px; margin-bottom: 25px; padding-left: 70px; position: relative; color: var(--text-dark); line-height: 1.5; }
         li::before { content: '🐾'; position: absolute; left: 0; top: 5px; color: var(--secondary-color); }
@@ -127,13 +136,6 @@
         .flow-path { display: flex; flex-direction: column; align-items: center; gap: 10px; }
         .flow-item { background: white; border: 5px solid var(--secondary-color); padding: 15px 60px; border-radius: 20px; font-size: 40px; font-weight: bold; width: 750px; text-align: center; }
         .flow-arrow { font-size: 35px; color: var(--primary-color); }
-        
-        /* 標竿法流程表格 Slide 23 */
-        .grid-3x3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; }
-        
-        .edu-example-box {
-            margin-top: 30px; padding-top: 20px; border-top: 3px dashed var(--secondary-color);
-        }
     </style>
 </head>
 <body onclick="handleGlobalClick(event)">
@@ -243,7 +245,7 @@
         </div>
     </div>
 
-    <!-- Slide 8: 內部因素 (加入教育實例) -->
+    <!-- Slide 8: 內部因素 -->
     <div class="slide">
         <h2 class="slide-title">內部因素：組織文化 🏠</h2>
         <div class="content-area">
@@ -251,10 +253,9 @@
                 <p style="font-size: 46px; color: var(--primary-color); font-weight: bold;">威權 vs. 民主：</p>
                 <p>軍職威權文化 vs. 證券投資業全員民主參與模式。</p>
                 <p style="margin-top: 25px; font-size: 34px;">領導風格（開明或專制）深刻決定資訊解讀效率。</p>
-                
-                <div class="edu-example-box">
-                    <p style="font-size: 32px; color: var(--primary-color); margin: 0;"><strong>💡 教育實例：</strong>校長若採威權領導，教師僅被動接受指令；若採民主參與（如校務會議共同決策），教師能主動回報學生需求，大幅提升資訊流通與決策品質。</p>
-                </div>
+            </div>
+            <div class="edu-example">
+                <p><strong>💡 教育實例：</strong><br>校長若採威權領導，教師僅被動接受指令；若採民主參與（如校務會議共同決策），教師能主動回報需求，提升決策品質。</p>
             </div>
         </div>
     </div>
@@ -271,22 +272,16 @@
         </div>
     </div>
 
-    <!-- Slide 10: 資訊需求分析 (點擊出現例子) -->
+    <!-- Slide 10: 資訊需求分析 (已刪除舊的多餘頁面) -->
     <div class="slide">
         <div class="page-memo">p.178</div>
-        <h2 class="slide-title">資訊來源：分析資訊需求 🎯</h2>
-        <div class="content-area" style="padding-top: 50px;">
-            <div class="highlight-box" style="margin-bottom: 40px; font-size: 32px; padding: 30px;">
-                <p><strong>理論基礎：</strong> 管理資訊系統的設計，必須針對不同部門之不同的資訊需求，主管的資訊需求也會隨組織層級而有所不同。</p>
-            </div>
-            
-            <!-- 隱藏的實例區塊，點擊後出現 -->
-            <div class="grid-2x2 step-item step-hidden" data-display="grid" style="opacity: 0; display: none; transition: opacity 0.5s ease;">
+        <h2 class="slide-title">資訊需求分析 🎯</h2>
+        <div class="content-area">
+            <div class="grid-2x2">
                 <div class="tile"><h3>功能部門差異 (實例)</h3><p>特教老師需要學生的IEP行為數據；校務行政端更關注年度預算執行率。</p></div>
                 <div class="tile"><h3>層級差異 (實例)</h3><p>導師需要個別學生的缺曠課細節；校長需要全校招生的綜合統計報告。</p></div>
             </div>
-            
-            <p class="step-item step-hidden" data-display="block" style="text-align: center; font-size: 36px; color: var(--primary-color); font-weight: bold; margin-top: 30px; opacity: 0; display: none; transition: opacity 0.5s ease;">系統設計必須針對教育現場角色客製化。</p>
+            <p style="text-align: center; font-size: 40px; color: var(--primary-color); font-weight: bold; margin-top: 50px;">系統設計必須針對教育現場角色客製化。</p>
         </div>
     </div>
 
@@ -299,10 +294,13 @@
                 <p>交易員李森利用系統漏洞及權力失效套利，短短二年半毀掉二百多年老店。</p>
                 <p style="margin-top: 25px; color: var(--primary-color);"><strong>啟示：</strong> 錯誤的系統，只會加速錯誤決策的災難發生。</p>
             </div>
+            <div class="edu-example">
+                <p><strong>💡 教育實例：</strong><br>若校務行政系統權限控管不當，錯誤的成績計算或預算數據，將導致全校決策失誤與資源浪費。</p>
+            </div>
         </div>
     </div>
 
-    <!-- Slide 12: 整合決策 (p.179 / 加粗框) -->
+    <!-- Slide 12: 整合決策 -->
     <div class="slide">
         <div class="page-memo">p.179</div>
         <h2 class="slide-title">整合決策：縱觀全局 🔗</h2>
@@ -311,18 +309,24 @@
                 <h3 style="font-size: 50px; color: var(--primary-color); margin-bottom: 20px;">高階主管</h3>
                 <p style="font-size: 42px; line-height: 1.5;">加總細部資料，<br>形成<strong>整體發展的策略方向</strong>。</p>
             </div>
+            <div class="edu-example">
+                <p><strong>💡 教育實例：</strong><br>校長彙整各處室與導師的回報數據，統整出全校年度的重點發展戰略與招生方向。</p>
+            </div>
         </div>
     </div>
 
-    <!-- Slide 13: 系統進化 -->
+    <!-- Slide 13: 系統進化 (增加教育實例) -->
     <div class="slide">
         <h2 class="slide-title">資訊處理系統的進化 🚀</h2>
         <div class="content-area">
             <div class="grid-2x2">
-                <div class="tile"><i class="fa-solid fa-cloud-bolt"></i><h3>雲端運算</h3><p>解放時空限制</p></div>
-                <div class="tile"><i class="fa-solid fa-vr-cardboard"></i><h3>虛擬實境</h3><p>跨國交流零距離</p></div>
-                <div class="tile"><i class="fa-solid fa-brain"></i><h3>專家系統</h3><p>AI 學習專家經驗</p></div>
-                <div class="tile"><i class="fa-solid fa-tower-broadcast"></i><h3>行動通訊</h3><p>人與人的時空距離，<br>不再成為問題</p></div>
+                <div class="tile" style="padding: 20px;"><i class="fa-solid fa-cloud-bolt"></i><h3>雲端運算</h3><p>解放時空限制</p></div>
+                <div class="tile" style="padding: 20px;"><i class="fa-solid fa-vr-cardboard"></i><h3>虛擬實境</h3><p>跨國交流零距離</p></div>
+                <div class="tile" style="padding: 20px;"><i class="fa-solid fa-brain"></i><h3>專家系統</h3><p>AI 學習專家經驗</p></div>
+                <div class="tile" style="padding: 20px;"><i class="fa-solid fa-tower-broadcast"></i><h3>行動通訊</h3><p>人與人的時空距離，不再成為問題</p></div>
+            </div>
+            <div class="edu-example">
+                <p><strong>💡 教育實例：</strong><br>運用雲端運算，特教教師可跨處室即時共編 IEP；透過行動通訊，親師溝通不再受限於家庭聯絡簿，能隨時掌握學生狀況。</p>
             </div>
         </div>
     </div>
@@ -336,10 +340,13 @@
                 <li><strong>邏輯推論：</strong> 使用邏輯推論而非單純函數定義。</li>
                 <li><strong>穩定可信：</strong> 無情緒波動、不生病、不偷懶。</li>
             </ul>
+            <div class="edu-example">
+                <p><strong>💡 教育實例：</strong><br>導入特教生情緒辨識專家系統，分析學生生理與表情特徵，穩定提供介入建議，不受教師主觀疲勞影響。</p>
+            </div>
         </div>
     </div>
 
-    <!-- Slide 15: AlphaGo (教育實例) -->
+    <!-- Slide 15: AlphaGo -->
     <div class="slide">
         <h2 class="slide-title">案例：AlphaGo 的衝擊 ♟️</h2>
         <div class="content-area">
@@ -379,7 +386,7 @@
         </div>
     </div>
 
-    <!-- Slide 18: 環境偵測 -->
+    <!-- Slide 18: 環境偵測 (增加教育實例) -->
     <div class="slide">
         <h2 class="slide-title">環境偵測：掃描大環境 📡</h2>
         <div class="content-area">
@@ -388,10 +395,13 @@
                 <li><strong>情報管道：</strong> 95% 資訊來自公開廣告、年報與政府公告。</li>
                 <li><strong>逆向工程：</strong> 拆解對手產品測知科技創新。</li>
             </ul>
+            <div class="edu-example">
+                <p><strong>💡 教育實例：</strong><br>學校管理者定期過濾學區人口數據與社區發展計畫（如新建社會住宅），以提前預備未來的師資與教室需求。</p>
+            </div>
         </div>
     </div>
 
-    <!-- Slide 19: 未來景象預測法 -->
+    <!-- Slide 19: 未來景象預測法 (增加教育實例) -->
     <div class="slide">
         <h2 class="slide-title">未來景象預測法 (Scenario) 🔮</h2>
         <div class="content-area">
@@ -406,7 +416,9 @@
                 <div class="flow-arrow"><i class="fa-solid fa-chevron-down"></i></div>
                 <div class="flow-item">5. 規劃中應用情境</div>
             </div>
-            <p style="text-align: center; margin-top: 20px; font-size: 28px; color: var(--secondary-color);">▲ 情境分析程序</p>
+            <div class="edu-example" style="margin-top: 15px; padding: 15px;">
+                <p style="font-size: 26px;"><strong>💡 教育實例：</strong><br>針對「特教生人數逐年攀升」的發展情境，學校可預先規畫增設資源班、無障礙設施及相關經費預算。</p>
+            </div>
         </div>
     </div>
 
@@ -450,7 +462,7 @@
         </div>
     </div>
 
-    <!-- Slide 23: (新增) 標竿法流程圖表 -->
+    <!-- Slide 23: 標竿法流程圖表 -->
     <div class="slide">
         <h2 class="slide-title">標竿管理的流程步驟 📝</h2>
         <div class="content-area">
@@ -495,7 +507,7 @@
         </div>
     </div>
 
-    <!-- Slide 26: 學術機構 (p190) -->
+    <!-- Slide 26: 學術機構 -->
     <div class="slide">
         <div class="page-memo">p.190</div>
         <h2 class="slide-title">情報來源：學術機構 📖</h2>
@@ -510,7 +522,7 @@
         </div>
     </div>
 
-    <!-- Slide 27: 非正式管道 (加入教育實例) -->
+    <!-- Slide 27: 非正式管道 -->
     <div class="slide">
         <div class="page-memo">p.190</div>
         <h2 class="slide-title">非正式管道：葡萄藤 🍇</h2>
@@ -520,8 +532,8 @@
                 <div style="flex:1;">
                     <p style="font-size: 36px; line-height: 1.6;"><strong>(在台灣：小道消息)</strong><br>訊息越隱密、切身傳播越快。主管應塑造<strong>信任關係</strong>與公開機制消滅謠言。</p>
                     
-                    <div style="margin-top: 30px; background: white; padding: 25px; border-radius: 20px; border-left: 8px solid var(--secondary-color); box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-                        <p style="font-size: 28px; margin: 0; color: var(--primary-color);"><strong>💡 教育實例：</strong><br>學校若未公開資源班減班或代課老師聘任標準，極易引發家長與教師間的不安耳語。唯有資訊透明才能消弭謠言。</p>
+                    <div class="edu-example">
+                        <p><strong>💡 教育實例：</strong><br>學校若未公開資源班減班或代課老師聘任標準，極易引發家長與教師間的不安耳語。唯有資訊透明才能消弭謠言。</p>
                     </div>
                 </div>
             </div>
@@ -552,6 +564,9 @@
                 <li>勿預設未來不變：科技變動極快。</li>
                 <li>交叉互證，縮短預測時間長度。</li>
             </ul>
+            <div class="edu-example">
+                <p><strong>💡 教育實例：</strong><br>預測特教班新生人數時，與其建立複雜數學模型，不如直接參考衛生局早療通報數據與戶政遷入率，簡單交叉比對準確度更高。</p>
+            </div>
         </div>
     </div>
 
@@ -608,7 +623,7 @@
         </div>
     </div>
 
-    <!-- Slide 34: QA 2 (教育實例) -->
+    <!-- Slide 34: QA 2 -->
     <div class="slide">
         <h2 class="slide-title">Q&A 互動時間 (2) 🐰❓</h2>
         <div class="content-area">
@@ -616,19 +631,28 @@
                 <p><strong>問題：</strong> 標竿設定如何改善組織的品質？</p>
                 <div class="qa-ans">
                     <p>答：透過學習業界最佳實務，量化差距並制定行動計畫。</p>
-                    <p style="margin-top: 15px; color: var(--primary-color); font-weight: bold;">教育實例：資源班可參考優質學校的成功經驗，向經驗豐富的學校了解教學方法與親師溝通技巧，找出成效差距並內化為本校標準作業程序。</p>
+                    <p style="margin-top: 15px; color: var(--primary-color); font-weight: bold;">教育實例：向經驗豐富的學校了解教學方法與親師溝通技巧，找出成效差距並內化為本校標準作業程序。</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Slide 35: 結語頁 -->
+    <!-- Slide 35: 結語頁與資料來源 -->
     <div class="slide">
-        <div class="content-area" style="align-items: center;">
-            <img src="image_81d747.png" style="width: 450px; border-radius: 40px; margin-bottom: 30px;" alt="結語">
-            <h1>謝謝各位的聆聽！</h1>
-            <p style="font-size: 28px; margin-top: 15px;">報告人：林宛儀 NB41F010 🐇</p>
-            <div style="margin-top: 40px; font-size: 100px;">🐾 🏛️ 🐾</div>
+        <div class="content-area" style="align-items: center; position: relative; height: 100%;">
+            <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex-grow: 1;">
+                <img src="image_81d747.png" style="width: 400px; border-radius: 40px; margin-bottom: 20px;" alt="結語">
+                <h1 style="font-size: 80px;">謝謝各位的聆聽！</h1>
+                <p style="font-size: 36px; margin-top: 20px;">報告人：林宛儀 NB41F010 🐇</p>
+            </div>
+            
+            <div style="position: absolute; bottom: 40px; width: 100%; text-align: left; background: white; padding: 25px 40px; border-radius: 20px; border: 4px solid var(--accent-color); box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <p style="font-size: 32px; color: var(--primary-color); font-weight: bold; margin: 0 0 10px 0;">📚 資料來源：</p>
+                <p style="font-size: 26px; color: var(--text-dark); margin: 0; line-height: 1.5;">
+                    1. 王秉鈞（主譯），《管理學》第七章<br>
+                    2. 教育部特殊教育資訊網與相關特教法規
+                </p>
+            </div>
         </div>
     </div>
 
@@ -655,39 +679,15 @@
         
         // 重置 QA 答案
         document.querySelectorAll('.qa-ans').forEach(ans => ans.style.display = 'none');
-        
-        // 重置點擊步驟
-        document.querySelectorAll('.step-item').forEach(item => {
-            item.classList.add('step-hidden');
-            item.style.opacity = '0';
-            item.style.display = 'none';
-        });
     }
 
     function nextAction() {
         const activeSlide = slides[currentSlide];
-        
-        // 1. 處理點擊顯示的步驟 (Slide 10)
-        const hiddenStep = activeSlide.querySelector('.step-hidden');
-        if (hiddenStep) {
-            hiddenStep.classList.remove('step-hidden');
-            hiddenStep.style.display = hiddenStep.dataset.display || 'block';
-            void hiddenStep.offsetWidth; // 觸發 reflow 以執行過渡動畫
-            hiddenStep.style.opacity = '1';
-            return; // 停在這裡，不要切換下一頁
-        }
-
-        // 2. 處理 QA 答案顯示
         const answer = activeSlide.querySelector('.qa-ans');
         if (answer && answer.style.display === 'none') {
             answer.style.display = 'block';
-            return;
-        } 
-        
-        // 3. 正常切換下一頁
-        if (currentSlide < slides.length - 1) { 
-            currentSlide++; 
-            showSlide(currentSlide); 
+        } else {
+            if (currentSlide < slides.length - 1) { currentSlide++; showSlide(currentSlide); }
         }
     }
 
