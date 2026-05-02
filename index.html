@@ -48,6 +48,32 @@
 
         .slide.active { display: flex; z-index: 10; }
 
+        /* 兔子浮水印 */
+        .slide::after {
+            content: '\f6e3'; /* FontAwesome rabbit 替代圖示 (此處使用 paw 以確保相容) */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            bottom: -50px; right: -50px;
+            font-size: 400px;
+            color: var(--secondary-color);
+            opacity: 0.05;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* 為了讓圖形更像兔子，使用偽元素組合 (可選) 或直接用自訂圖片 */
+        .watermark {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 300px;
+            color: var(--secondary-color);
+            opacity: 0.04; /* 淡淡的 */
+            z-index: 0;
+            pointer-events: none;
+        }
+
         /* UI 元素 */
         #live-clock {
             position: fixed; bottom: 30px; left: 30px; 
@@ -71,6 +97,7 @@
             font-weight: bold; background: white;
             padding: 8px 20px; border-radius: 10px;
             border: 2px solid var(--accent-color);
+            z-index: 100;
         }
 
         .slide-title {
@@ -78,9 +105,10 @@
             border-left: 20px solid var(--secondary-color);
             padding-left: 30px; margin-bottom: 40px; text-align: left;
             font-weight: 600;
+            z-index: 2;
         }
 
-        .content-area { width: 100%; max-width: 1400px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+        .content-area { width: 100%; max-width: 1400px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; z-index: 2; }
 
         /* 網格與佈局 */
         .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 30px; width: 100%; }
@@ -125,9 +153,9 @@
         .img-box img { width: 100%; height: auto; display: block; }
 
         /* 轉場頁樣式 */
-        .section-header { font-size: 90px; color: var(--primary-color); text-align: center; margin: 0; }
-        .section-subheader { font-size: 50px; color: var(--secondary-color); text-align: center; margin-top: 20px; }
-        .section-icons { font-size: 150px; display: flex; justify-content: center; gap: 50px; margin-top: 50px; align-items: center; }
+        .section-header { font-size: 90px; color: var(--primary-color); text-align: center; margin: 0; z-index: 2;}
+        .section-subheader { font-size: 50px; color: var(--secondary-color); text-align: center; margin-top: 20px; z-index: 2;}
+        .section-icons { font-size: 150px; display: flex; justify-content: center; gap: 50px; margin-top: 50px; align-items: center; z-index: 2;}
 
         /* 互動樣式 */
         .qa-ans { margin-top: 30px; padding: 30px; background: white; border-radius: 20px; display: none; border-left: 15px solid var(--primary-color); font-size: 38px; }
@@ -147,6 +175,7 @@
 
     <!-- Slide 1: 標題頁 -->
     <div class="slide active">
+        <div class="watermark">🐰</div>
         <div class="content-area" style="align-items: center;">
             <h1>第七章 情蒐與偵測</h1>
             <div class="author">NB41F010 林宛儀</div>
@@ -155,6 +184,7 @@
 
     <!-- Slide 2: 教育案例 (p174) -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <div class="page-memo">p.174</div>
         <h2 class="slide-title">教育現場：消失的學生 📉</h2>
         <div class="content-area">
@@ -170,6 +200,7 @@
 
     <!-- Slide 3: 偵測失效 (p174) -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <div class="page-memo">p.174</div>
         <h2 class="slide-title">偵測失效：流浪教師問題 ⚠️</h2>
         <div class="content-area">
@@ -182,6 +213,7 @@
 
     <!-- Slide 4: 大數據 (p175) -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <div class="page-memo">p.175</div>
         <h2 class="slide-title">數位時代的大數據浪潮 💻</h2>
         <div class="content-area">
@@ -199,6 +231,7 @@
 
     <!-- Slide 5: 第一節 定義 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <h2 class="slide-title">第一節 情蒐與偵測的定義 🔍</h2>
         <div class="content-area">
             <div class="def-container">
@@ -219,6 +252,7 @@
 
     <!-- Slide 6: 第二節 環境認知 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <div class="page-memo">p.176</div>
         <h2 class="slide-title">環境認知 🧠</h2>
         <div class="content-area">
@@ -234,6 +268,7 @@
 
     <!-- Slide 7: 外部因素 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <div class="page-memo">p.176</div>
         <h2 class="slide-title">外部因素：規範組織大部分可行範圍 🌎</h2>
         <div class="content-area">
@@ -247,6 +282,7 @@
 
     <!-- Slide 8: 內部因素 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <h2 class="slide-title">內部因素：組織文化 🏠</h2>
         <div class="content-area">
             <div class="highlight-box">
@@ -262,6 +298,7 @@
 
     <!-- Slide 9: 主觀解讀 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <div class="page-memo">p.177</div>
         <h2 class="slide-title">主觀解讀的決定性 💡</h2>
         <div class="content-area">
@@ -274,6 +311,7 @@
 
     <!-- Slide 10: 資訊需求分析 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <div class="page-memo">p.178</div>
         <h2 class="slide-title">分析資訊需求 🎯</h2>
         <div class="content-area">
@@ -287,6 +325,7 @@
 
     <!-- Slide 11: 霸菱案例 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <h2 class="slide-title">錯誤系統的惡果：霸菱倒閉 🚫</h2>
         <div class="content-area">
             <div class="highlight-box">
@@ -302,6 +341,7 @@
 
     <!-- Slide 12: 整合決策 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <div class="page-memo">p.179</div>
         <h2 class="slide-title">整合決策：縱觀全局 🔗</h2>
         <div class="content-area">
@@ -317,6 +357,7 @@
 
     <!-- Slide 13: 系統進化 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <h2 class="slide-title">資訊處理系統的進化 🚀</h2>
         <div class="content-area">
             <div class="grid-2x2">
@@ -333,6 +374,7 @@
 
     <!-- Slide 14: 專家系統 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <h2 class="slide-title">專家系統的特徵與優勢 🤖</h2>
         <div class="content-area">
             <ul>
@@ -348,6 +390,7 @@
 
     <!-- Slide 15: AlphaGo -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <h2 class="slide-title">案例：AlphaGo 的衝擊 ♟️</h2>
         <div class="content-area">
             <div class="highlight-box" style="font-size: 34px;">
@@ -361,6 +404,7 @@
 
     <!-- Slide 16: 偵蒐目的 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <h2 class="slide-title">偵蒐的六大目的 🎯</h2>
         <div class="content-area">
             <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%;">
@@ -376,6 +420,7 @@
 
     <!-- Slide 17: 第二節轉場 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <div class="content-area">
             <h2 class="section-header">第二節 評估環境的技術 (P182)</h2>
             <p class="section-subheader">環境偵測、預測與標竿設定技術</p>
@@ -388,6 +433,7 @@
 
     <!-- Slide 18: 環境偵測 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <h2 class="slide-title">環境偵測：掃描大環境 📡</h2>
         <div class="content-area">
             <ul>
@@ -401,8 +447,9 @@
         </div>
     </div>
 
-    <!-- Slide 19: 未來景象預測法 (已移除實例) -->
+    <!-- Slide 19: 未來景象預測法 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <h2 class="slide-title">未來景象預測法 (Scenario) 🔮</h2>
         <div class="content-area">
             <div class="flow-path">
@@ -422,6 +469,7 @@
 
     <!-- Slide 20: 三菱商事 (一) -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <h2 class="slide-title">全球偵測：三菱商事案例 (一) 🌐</h2>
         <div class="content-area">
             <div class="highlight-box" style="font-size: 34px;">
@@ -436,6 +484,7 @@
 
     <!-- Slide 21: 三菱商事 (二) -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <h2 class="slide-title">全球偵測：三菱商事案例 (二) 🌐</h2>
         <div class="content-area">
             <div class="highlight-box" style="font-size: 34px;">
@@ -449,6 +498,7 @@
 
     <!-- Slide 22: 標竿法 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <h2 class="slide-title">標竿法：知己知彼 ♟️</h2>
         <div class="content-area">
             <div style="display:flex; align-items:center; gap:50px;">
@@ -462,6 +512,7 @@
 
     <!-- Slide 23: 標竿法流程圖表 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <h2 class="slide-title">標竿管理的流程步驟 📝</h2>
         <div class="content-area">
             <div class="grid-3x3">
@@ -481,6 +532,7 @@
 
     <!-- Slide 24: 第三節轉場 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <div class="content-area">
             <h2 class="section-header">第三節 情報與資訊來源 (P189)</h2>
             <p class="section-subheader">政府、學術、民間與非正式管道</p>
@@ -494,6 +546,7 @@
 
     <!-- Slide 25: 政府來源 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <h2 class="slide-title">情報來源：政府資料庫 🎓</h2>
         <div class="content-area">
             <div class="grid-2x2">
@@ -507,6 +560,7 @@
 
     <!-- Slide 26: 學術機構 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <div class="page-memo">p.190</div>
         <h2 class="slide-title">情報來源：學術機構 📖</h2>
         <div class="content-area">
@@ -522,6 +576,7 @@
 
     <!-- Slide 27: 非正式管道 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <div class="page-memo">p.190</div>
         <h2 class="slide-title">非正式管道：葡萄藤 🍇</h2>
         <div class="content-area">
@@ -540,6 +595,7 @@
 
     <!-- Slide 28: 尼爾森 vs 大數據 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <h2 class="slide-title">民間數據變革：尼爾森的局限 📊</h2>
         <div class="content-area">
             <div class="highlight-box" style="font-size: 32px; padding: 40px;">
@@ -555,6 +611,7 @@
 
     <!-- Slide 29: 改善預測建議 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <h2 class="slide-title">改善預測效能的建議 💡</h2>
         <div class="content-area">
             <ul>
@@ -570,6 +627,7 @@
 
     <!-- Slide 30: 第四節 大數據 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <h2 class="slide-title">第四節 數位時代大數據 🌐</h2>
         <div class="content-area">
             <div class="grid-2x2">
@@ -583,6 +641,7 @@
 
     <!-- Slide 31: 防疫實例 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <h2 class="slide-title">防疫實例：鑽石公主號 🚢</h2>
         <div class="content-area">
             <div style="display:flex; align-items:center; gap:30px;">
@@ -602,6 +661,7 @@
 
     <!-- Slide 32: 隱私保護 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <h2 class="slide-title">數據的憂患：隱私與界線 🔒</h2>
         <div class="content-area">
             <div class="highlight-box">
@@ -612,6 +672,7 @@
 
     <!-- Slide 33: QA 1 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <h2 class="slide-title">Q&A 互動時間 (1) 🐰❓</h2>
         <div class="content-area">
             <div class="highlight-box">
@@ -623,6 +684,7 @@
 
     <!-- Slide 34: QA 2 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <h2 class="slide-title">Q&A 互動時間 (2) 🐰❓</h2>
         <div class="content-area">
             <div class="highlight-box" style="font-size: 34px;">
@@ -637,6 +699,7 @@
 
     <!-- Slide 35: 結語頁與資料來源 -->
     <div class="slide">
+        <div class="watermark">🐰</div>
         <div class="content-area" style="align-items: center; position: relative; height: 100%;">
             <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex-grow: 1;">
                 <img src="image_81d747.png" style="width: 400px; border-radius: 40px; margin-bottom: 20px;" alt="結語">
