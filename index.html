@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>情蒐與偵測 - NB41F010 林宛儀</title>
+    <title>第七章 情蒐與偵測 - NB41F010 林宛儀</title>
     <!-- 引入 Klee One (芫荽體/香菜字體風格) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=Quicksand:wght@500;700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
@@ -23,9 +23,10 @@
         * { box-sizing: border-box; }
         body, html {
             margin: 0; padding: 0; height: 100%; width: 100%;
-            background-color: #222;
-            font-family: 'Klee One', sans-serif;
+            background-color: #333;
+            font-family: 'Klee One', 'Noto Sans TC', sans-serif;
             overflow: hidden;
+            text-justify: inter-character;
         }
 
         .slider {
@@ -44,10 +45,7 @@
             z-index: 1;
         }
 
-        .slide.active {
-            display: flex;
-            z-index: 10;
-        }
+        .slide.active { display: flex; z-index: 10; }
 
         /* UI 元素 */
         #live-clock {
@@ -74,7 +72,6 @@
             border: 2px solid var(--accent-color);
         }
 
-        /* 標題與內容 */
         .slide-title {
             width: 100%; font-size: var(--title-size); color: var(--primary-color);
             border-left: 20px solid var(--secondary-color);
@@ -84,57 +81,59 @@
 
         .content-area { width: 100%; max-width: 1400px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
 
-        /* 第 5 頁：定義方塊大小一致 */
+        /* 網格與佈局 */
+        .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 30px; width: 100%; }
+        
         .def-container { display: flex; gap: 40px; justify-content: center; width: 100%; }
         .def-box {
             background: white; border: 5px solid var(--accent-color); border-radius: 40px;
-            padding: 40px; width: 500px; height: 380px; /* 強制大小一致 */
+            padding: 40px; width: 500px; height: 350px;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
-        .def-box i { font-size: 80px; color: var(--secondary-color); margin-bottom: 25px; }
         .def-box h3 { font-size: 44px; color: var(--primary-color); margin: 0 0 15px 0; }
         .def-box p { font-size: 30px; color: var(--text-dark); margin: 0; line-height: 1.4; }
 
-        /* 第 19 頁：流程圖設計 */
-        .flow-path { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
-        .flow-item {
-            background: white; border: 5px solid var(--secondary-color);
-            padding: 15px 50px; border-radius: 20px;
-            font-size: 40px; font-weight: bold; color: var(--text-dark);
-            width: 800px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .flow-arrow { font-size: 35px; color: var(--primary-color); }
+        .tile { background: white; padding: 30px; border-radius: 30px; border: 4px solid var(--accent-color); text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative; }
+        .tile h3 { font-size: 40px; color: var(--primary-color); margin-bottom: 10px; }
+        .tile p { font-size: 30px; color: var(--text-dark); margin: 0; }
+        .order-tag { position: absolute; top: 10px; left: 20px; font-weight: bold; color: var(--secondary-color); font-size: 24px; }
 
-        /* 網格系統 */
-        .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 20px; width: 100%; }
-        .grid-3x2 { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr 1fr; gap: 20px; width: 100%; }
-        
-        .tile { background: white; padding: 30px; border-radius: 30px; border: 4px solid var(--accent-color); text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: center; }
-        .tile h3 { font-size: 40px; color: var(--primary-color); margin: 0; line-height: 1.2; }
-        .tile p { font-size: 28px; color: var(--text-dark); margin-top: 10px; }
-        
-        /* 萬用組件 */
-        .highlight-box { background: var(--accent-color); padding: 50px; border-radius: 40px; border: 4px dashed var(--primary-color); font-size: 40px; line-height: 1.6; width: 100%; }
+        .highlight-box { background: var(--accent-color); padding: 50px; border-radius: 40px; border: 4px dashed var(--primary-color); font-size: 38px; line-height: 1.6; width: 100%; }
         .bold-border { border: 12px solid var(--primary-color); background: white; padding: 50px; border-radius: 40px; text-align: center; }
         
         ul { list-style: none; padding: 0; }
-        li { font-size: 40px; margin-bottom: 30px; padding-left: 70px; position: relative; color: var(--text-dark); line-height: 1.5; }
+        li { font-size: 38px; margin-bottom: 25px; padding-left: 70px; position: relative; color: var(--text-dark); line-height: 1.5; }
         li::before { content: '🐰'; position: absolute; left: 0; top: 5px; }
 
-        h1 { font-size: 100px; color: var(--primary-color); margin: 0; text-align: center; font-weight: 600; }
-        .subtitle { font-size: 44px; color: var(--secondary-color); text-align: center; margin-top: 20px; }
-        .author { font-size: 36px; color: var(--text-dark); font-weight: bold; text-align: center; margin-top: 40px; }
+        h1 { font-size: 110px; color: var(--primary-color); margin: 0; text-align: center; font-weight: 600; }
+        .author { font-size: 40px; color: var(--text-dark); font-weight: bold; text-align: center; margin-top: 50px; }
 
         .img-box { width: 100%; border-radius: 25px; overflow: hidden; border: 8px solid white; box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
         .img-box img { width: 100%; height: auto; display: block; }
 
-        .qa-ans { margin-top: 30px; padding: 30px; background: white; border-radius: 20px; display: none; border-left: 15px solid var(--primary-color); font-size: 38px; }
+        /* 放大鏡特效 Slide 30 */
+        .zoom-area { position: relative; width: 100%; cursor: crosshair; }
+        .lens {
+            position: absolute; width: 300px; height: 300px;
+            border: 6px solid var(--primary-color); border-radius: 50%;
+            pointer-events: none; visibility: hidden; z-index: 100;
+            background-repeat: no-repeat; box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            background-color: white;
+        }
 
         /* 轉場頁樣式修正 */
-        .section-break-content { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-        .section-break-content h2 { font-size: 80px; color: var(--primary-color); margin-bottom: 30px; }
-        .section-break-content .icon-group { font-size: 150px; margin-top: 40px; display: flex; gap: 40px; align-items: center; }
+        .section-header { font-size: 90px; color: var(--primary-color); text-align: center; margin: 0; }
+        .section-subheader { font-size: 50px; color: var(--secondary-color); text-align: center; margin-top: 20px; }
+        .section-icons { font-size: 150px; display: flex; justify-content: center; gap: 50px; margin-top: 50px; align-items: center; }
+
+        /* QA 互動樣式 */
+        .qa-ans { margin-top: 30px; padding: 30px; background: white; border-radius: 20px; display: none; border-left: 15px solid var(--primary-color); font-size: 38px; }
+
+        /* 流程圖 Slide 19 */
+        .flow-path { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .flow-item { background: white; border: 5px solid var(--secondary-color); padding: 15px 60px; border-radius: 20px; font-size: 40px; font-weight: bold; width: 750px; text-align: center; }
+        .flow-arrow { font-size: 35px; color: var(--primary-color); }
     </style>
 </head>
 <body onclick="handleGlobalClick(event)">
@@ -147,41 +146,39 @@
     <!-- Slide 1: 標題頁 -->
     <div class="slide active">
         <div class="content-area" style="align-items: center;">
-            <img src="image_82321d.png" style="width: 350px; margin-bottom: 30px;" alt="西裝兔">
-            <h1>情蒐與偵測 🐰</h1>
-            <p class="subtitle">王秉鈞《管理學》第七章整合報告</p>
+            <h1>第七章 情蒐與偵測</h1>
             <div class="author">NB41F010 林宛儀</div>
         </div>
     </div>
 
-    <!-- Slide 2: 教育案例 (p.174) -->
+    <!-- Slide 2: 教育案例 (p174) -->
     <div class="slide">
         <div class="page-memo">p.174</div>
         <h2 class="slide-title">教育現場：消失的學生 📉</h2>
         <div class="content-area">
             <div class="highlight-box">
                 <ul>
-                    <li><strong>文山區案例：</strong> 新小學成立，舊校生源卻縮減，顯示人口偵測失效。</li>
-                    <li><strong>少子化現實：</strong> 班級人數從 50 降至 20 餘人，小班制被迫提前實現。</li>
+                    <li><strong>文山區觀察：</strong> 新小學成立後舊校生源萎縮，校舍老舊導致學區流失。</li>
+                    <li><strong>少子化趨勢：</strong> 每班人數由 50 人銳減至 20 餘人，小班制被迫提前實現。</li>
                     <li><strong>環境偵測不足：</strong> 教育體系未能預見人口結構劇烈改變，資源分配受限。</li>
                 </ul>
             </div>
         </div>
     </div>
 
-    <!-- Slide 3: 偵測失效 (p.174) -->
+    <!-- Slide 3: 偵測失效 (p174) -->
     <div class="slide">
         <div class="page-memo">p.174</div>
         <h2 class="slide-title">偵測失效：流浪教師問題 ⚠️</h2>
         <div class="content-area">
             <div class="highlight-box">
-                <p>政府忽視人口成長趨緩警訊。</p>
-                <p style="margin-top: 35px;"><strong>後果：</strong> 師範體系持續產出，但系統不再吸納，導致流浪教師社會問題。招生不足令資源捉襟見肘。 🐰💔</p>
+                <p>政府長期忽視人口成長趨緩警訊。</p>
+                <p style="margin-top: 30px;"><strong>後果：</strong> 師範體系持續培育教師，但系統不再吸納，導致流浪教師社會問題。招生不足令資源分配面臨困難。 🐰💔</p>
             </div>
         </div>
     </div>
 
-    <!-- Slide 4: 大數據 (p.175) -->
+    <!-- Slide 4: 大數據 (p175 / 修正商業模式) -->
     <div class="slide">
         <div class="page-memo">p.175</div>
         <h2 class="slide-title">數位時代的大數據浪潮 💻</h2>
@@ -189,7 +186,10 @@
             <div class="grid-2x2">
                 <div class="tile"><h3>2015 預測</h3><p>超過 25% 企業導入巨量方案</p></div>
                 <div class="tile"><h3>核心能力</h3><p>五年內成為公司必備基本功能</p></div>
-                <div class="tile"><h3>利潤模式</h3><p>解讀巨量資料轉換為商業利潤</p></div>
+                <div class="tile">
+                    <h3>商業模式</h3>
+                    <p style="font-size: 24px; text-align: left; padding: 10px;">要從巨量資料中找出有意義的模式 (pattern)，再用商業方式把這樣的模式轉變成可以創造利潤的商業模式。</p>
+                </div>
                 <div class="tile"><h3>數據競爭</h3><p>不在於大，在於如何運用與解讀</p></div>
             </div>
         </div>
@@ -201,81 +201,82 @@
         <div class="content-area">
             <div class="def-container">
                 <div class="def-box">
-                    <i class="fa-solid fa-folder-open"></i>
+                    <i class="fa-solid fa-folder-open" style="font-size: 60px; color: var(--secondary-color); margin-bottom: 20px;"></i>
                     <h3>情蒐</h3>
-                    <p>Information Gathering<br>重視資料的收集與建檔。</p>
+                    <p>Information Gathering<br>重視資料的廣泛收集與建檔。</p>
                 </div>
                 <div class="def-box">
-                    <i class="fa-solid fa-magnifying-glass-chart"></i>
+                    <i class="fa-solid fa-magnifying-glass-chart" style="font-size: 60px; color: var(--secondary-color); margin-bottom: 20px;"></i>
                     <h3>偵測</h3>
                     <p>Investigation<br>強調事物前因後果的調查。</p>
                 </div>
             </div>
-            <p style="margin-top: 50px; font-size: 36px; text-align: center; color: var(--primary-color); font-weight: bold;">兩者互通，核心是掌握決策的「事實前提」。</p>
+            <p style="margin-top: 40px; font-size: 34px; text-align: center; color: var(--primary-color); font-weight: bold;">兩者互通，核心是掌握決策的「事實前提」。</p>
         </div>
     </div>
 
-    <!-- Slide 6: 環境認知 (p.176) -->
+    <!-- Slide 6: 第二節 環境認知 (依 1234 順序) -->
     <div class="slide">
         <div class="page-memo">p.176</div>
         <h2 class="slide-title">評估環境的技術 🧠</h2>
         <div class="content-area">
-            <div class="grid-2x2" style="gap: 40px;">
-                <div class="tile"><h3>外部環境</h3><p>政府、產業、對手</p></div>
-                <div class="tile"><h3>內部環境</h3><p>文化、制度、領導</p></div>
-                <div class="tile"><h3>主觀認知</h3><p>解讀能力是競爭力來源</p></div>
-                <div class="tile"><h3>事實前提</h3><p>掌握組織面對的真實樣貌</p></div>
+            <div class="grid-2x2">
+                <div class="tile" style="border: 6px solid var(--secondary-color);"><span class="order-tag">1.</span><h3>事實前提</h3><p>掌握組織面對的真實樣貌</p></div>
+                <div class="tile"><span class="order-tag">2.</span><h3>外部環境</h3><p>政府、產業、對手動向</p></div>
+                <div class="tile"><span class="order-tag">3.</span><h3>內部環境</h3><p>文化、制度、領導風格</p></div>
+                <div class="tile"><span class="order-tag">4.</span><h3>主觀認知</h3><p>資訊知能影響判斷與解讀</p></div>
             </div>
-            <p style="text-align: center; margin-top: 50px; font-weight: 900; font-size: 46px; color: var(--primary-color);">認知能力與水準是競爭力來源。</p>
+            <p style="text-align: center; margin-top: 40px; font-weight: 900; font-size: 44px; color: var(--primary-color);">認知能力與水準是競爭力來源。</p>
         </div>
     </div>
 
-    <!-- Slide 7: 外部因素 -->
+    <!-- Slide 7: 外部因素 (修正標題) -->
     <div class="slide">
         <div class="page-memo">p.176</div>
         <h2 class="slide-title">外部因素：規範組織大部分可行範圍 🌎</h2>
         <div class="content-area">
             <ul>
-                <li><strong>政府政策：</strong> 最低工資調整對組織人事費之影響。</li>
-                <li><strong>產業趨勢：</strong> 天然資源枯竭或海水升溫（如鱈魚北游案例）。</li>
-                <li><strong>競爭動態：</strong> 對手多寡與激烈程度直接影響生存。</li>
+                <li><strong>政府政策：</strong> 最低工資與特教法規對人事費之影響。</li>
+                <li><strong>產業趨勢：</strong> 天然資源枯竭或地球暖化導致生態移動。</li>
+                <li><strong>競爭動態：</strong> 對手激烈程度直接影響生存空間。</li>
             </ul>
         </div>
     </div>
 
-    <!-- Slide 8: 內部因素 -->
+    <!-- Slide 8: 內部因素 (民主模式) -->
     <div class="slide">
         <h2 class="slide-title">內部因素：組織文化 🏠</h2>
         <div class="content-area">
             <div class="highlight-box">
                 <p style="font-size: 46px; color: var(--primary-color); font-weight: bold;">威權 vs. 民主：</p>
-                <p>軍職威權文化 vs. 證券投資業全員參與之民主模式。</p>
-                <p style="margin-top: 30px; font-size: 34px;">領導風格（開明或專制）深刻影響資訊流動效率。</p>
+                <p>軍職威權文化 vs. 證券投資業全員民主參與模式。</p>
+                <p style="margin-top: 30px; font-size: 34px;">領導風格（開明或專制）深刻決定資訊解讀效率。</p>
             </div>
         </div>
     </div>
 
-    <!-- Slide 9: 主觀解讀 (p.177) -->
+    <!-- Slide 9: 主觀解讀 (移除教授) -->
     <div class="slide">
         <div class="page-memo">p.177</div>
-        <h2 class="slide-title">主觀解讀的決定性 🐰💡</h2>
+        <h2 class="slide-title">主觀解讀的決定性 💡</h2>
         <div class="content-area">
             <div class="highlight-box">
-                <p>司徒達賢教授：解讀環境是主觀的。</p>
+                <p>解讀環境是主觀的。</p>
                 <p style="margin-top: 30px; font-weight: bold;">「相同的客觀環境，會因主觀認知不同，產生截然不同的解讀與策略。」</p>
             </div>
         </div>
     </div>
 
-    <!-- Slide 10: 資訊需求分析 -->
+    <!-- Slide 10: 資訊需求分析 (p.178 / 教育實例) -->
     <div class="slide">
+        <div class="page-memo">p.178</div>
         <h2 class="slide-title">資訊需求分析 🎯</h2>
         <div class="content-area">
-            <ul>
-                <li><strong>功能部門：</strong> 行銷與財務經理所需的資訊廣度不同。</li>
-                <li><strong>組織層級：</strong> 高階需要環境綜覽；低階需要作業細節。</li>
-            </ul>
-            <p style="text-align: center; font-size: 40px; color: var(--primary-color); font-weight: bold; margin-top: 30px;">系統設計必須針對特定對象客製化。</p>
+            <div class="grid-2x2">
+                <div class="tile"><h3>功能部門差異</h3><p>特教老師需要學生的IEP行為數據；校務行政端更關注年度預算執行率。</p></div>
+                <div class="tile"><h3>層級差異</h3><p>導師需要個別學生的缺曠課細節；校長需要全校招生的綜合統計報告。</p></div>
+            </div>
+            <p style="text-align: center; font-size: 38px; color: var(--primary-color); font-weight: bold; margin-top: 40px;">系統設計必須針對特定教育角色客製化。</p>
         </div>
     </div>
 
@@ -284,21 +285,21 @@
         <h2 class="slide-title">錯誤系統的惡果：霸菱倒閉 🚫</h2>
         <div class="content-area">
             <div class="highlight-box">
-                <h3 style="font-size: 48px; margin-bottom: 20px;">霸菱銀行倒閉 (1995)</h3>
-                <p>交易員李森利用系統漏洞及稽核失效進行套利。</p>
-                <p style="margin-top: 25px; color: var(--primary-color);"><strong>啟示：</strong> 錯誤的系統只會加速錯誤決策的災難發生。</p>
+                <h3 style="font-size: 50px; margin-bottom: 20px;">霸菱銀行倒閉 (1995)</h3>
+                <p>交易員李森利用系統漏洞及權力失效套利，短短二年半毀掉二百多年老店。</p>
+                <p style="margin-top: 25px; color: var(--primary-color);"><strong>啟示：</strong> 錯誤的系統，只會加速錯誤決策的災難發生。</p>
             </div>
         </div>
     </div>
 
-    <!-- Slide 12: 整合決策 (p.179) -->
+    <!-- Slide 12: 整合決策 (p.179 / 加粗框) -->
     <div class="slide">
         <div class="page-memo">p.179</div>
         <h2 class="slide-title">整合決策：縱觀全局 🔗</h2>
         <div class="content-area">
             <div class="bold-border">
                 <h3 style="font-size: 50px; color: var(--primary-color); margin-bottom: 20px;">高階主管</h3>
-                <p style="font-size: 42px; line-height: 1.5;">加總細部資料，<br>形成<strong>整體發展的策略方向</strong>。</p>
+                <p style="font-size: 42px; line-height: 1.5;">由細部資料整理加總，<br>形成<strong>整體發展的策略方向</strong>。</p>
             </div>
         </div>
     </div>
@@ -308,10 +309,10 @@
         <h2 class="slide-title">資訊處理系統的進化 🚀</h2>
         <div class="content-area">
             <div class="grid-2x2">
-                <div class="tile"><i class="fa-solid fa-cloud-bolt" style="font-size:50px; color:var(--secondary-color); margin-bottom:10px;"></i><h3>雲端運算</h3><p>解放時空限制</p></div>
-                <div class="tile"><i class="fa-solid fa-vr-cardboard" style="font-size:50px; color:var(--secondary-color); margin-bottom:10px;"></i><h3>虛擬實境</h3><p>跨國交流零距離</p></div>
-                <div class="tile"><i class="fa-solid fa-brain" style="font-size:50px; color:var(--secondary-color); margin-bottom:10px;"></i><h3>專家系統</h3><p>AI 學習專家經驗</p></div>
-                <div class="tile"><i class="fa-solid fa-tower-broadcast" style="font-size:50px; color:var(--secondary-color); margin-bottom:10px;"></i><h3>行動通訊</h3><p>隨時隨地機動決策</p></div>
+                <div class="tile"><i class="fa-solid fa-cloud-bolt"></i><h3>雲端運算</h3><p>解放時空限制</p></div>
+                <div class="tile"><i class="fa-solid fa-vr-cardboard"></i><h3>虛擬實境</h3><p>跨國交流零距離</p></div>
+                <div class="tile"><i class="fa-solid fa-brain"></i><h3>專家系統</h3><p>AI 學習專家經驗</p></div>
+                <div class="tile"><i class="fa-solid fa-tower-broadcast"></i><h3>行動通訊</h3><p>全時空機動決策</p></div>
             </div>
         </div>
     </div>
@@ -320,34 +321,32 @@
     <div class="slide">
         <h2 class="slide-title">專家系統的特徵與優勢 🤖</h2>
         <div class="content-area">
-            <div class="highlight-box">
-                <ul>
-                    <li><strong>專業範疇：</strong> 具備特殊領域內的深度知識。</li>
-                    <li><strong>邏輯推論：</strong> 使用邏輯推論而非單純函數定義。</li>
-                    <li><strong>穩定操作：</strong> 無情緒影響、不偷懶、不生病。</li>
+            <ul>
+                <li><strong>特定知識：</strong> 具備特殊專業範疇之深度知識。</li>
+                <li><strong>邏輯推論：</strong> 使用邏輯推論而非單純函數定義。</li>
+                <li><strong>穩定可信：</strong> 無情緒波動、不生病、不偷懶。</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 15: AlphaGo (教育實例) -->
+    <div class="slide">
+        <h2 class="slide-title">案例：AlphaGo 的衝擊 ♟️</h2>
+        <div class="content-area">
+            <div class="highlight-box" style="font-size: 34px;">
+                <p>人類已在智慧競技中向 AI 稱臣，而人類的智慧將轉移到更複雜與多元的項目上。</p>
+                <ul style="margin-top: 25px;">
+                    <li style="font-size: 32px;"><strong>教育實例：</strong> AI可自動批改作業與提供語音報讀；教師轉而聚焦「品格生命培育」與「深層情感連結」。</li>
                 </ul>
             </div>
         </div>
     </div>
 
-    <!-- Slide 15: AlphaGo -->
-    <div class="slide">
-        <h2 class="slide-title">案例：AlphaGo 的衝擊 ♟️</h2>
-        <div class="content-area">
-            <div class="two-column" style="display:flex; align-items:center; gap:50px;">
-                <div style="flex:1; font-size: 150px; text-align: center;">🤖♟️</div>
-                <div style="flex:1;">
-                    <p style="font-size: 40px; line-height: 1.6;">人類已在智慧競技中向 AI 稱臣。未來競爭將轉向更複雜的非結構化決策項目。</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 16: 偵蒐的六大目的 (修正：全部放入格子) -->
+    <!-- Slide 16: 偵蒐目的 -->
     <div class="slide">
         <h2 class="slide-title">偵蒐的六大目的 🎯</h2>
         <div class="content-area">
-            <div class="grid-3x2">
+            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%;">
                 <div class="tile"><h3>1. 監測變化</h3></div>
                 <div class="tile"><h3>2. 瞭解發展</h3></div>
                 <div class="tile"><h3>3. 知曉對手</h3></div>
@@ -358,26 +357,26 @@
         </div>
     </div>
 
-    <!-- Slide 17: 第二節轉場 (修正：與其他章節頁一致) -->
+    <!-- Slide 17: 第二節轉場 (修正圖示) -->
     <div class="slide">
-        <div class="content-area section-break-content">
-            <h2>第二節 評估環境的技術 (P182)</h2>
-            <p style="font-size: 40px; color: var(--secondary-color);">環境偵測、預測與標竿設定技術</p>
-            <div class="icon-group">
-                <i class="fa-solid fa-clipboard-list" style="color: #8d6e63;"></i>
-                <img src="image_82321d.png" style="width: 250px;" alt="兔子">
+        <div class="content-area">
+            <h2 class="section-header">第二節 評估環境的技術 (P182)</h2>
+            <p class="section-subheader">環境偵測、預測與標竿設定技術</p>
+            <div class="section-icons">
+                <i class="fa-solid fa-user-tie" style="color: #6d4c41;"></i>
+                <span>👨‍💼</span>
             </div>
         </div>
     </div>
 
     <!-- Slide 18: 環境偵測 -->
     <div class="slide">
-        <h2 class="slide-title">環境偵測：過濾趨勢 📡</h2>
+        <h2 class="slide-title">環境偵測：掃描大環境 📡</h2>
         <div class="content-area">
             <ul>
-                <li><strong>過濾資訊：</strong> 找出即將浮現的趨勢，勾勒未來可能景象。</li>
-                <li><strong>情報管道：</strong> 95% 資訊來自廣告、年報、政府公告。</li>
-                <li><strong>逆向工程：</strong> 拆解對手產品以測知技術創新。</li>
+                <li><strong>過濾資訊：</strong> 找出即將浮現趨勢，勾勒未來景象。</li>
+                <li><strong>情報管道：</strong> 95% 資訊來自公開廣告、年報與政府公告。</li>
+                <li><strong>逆向工程：</strong> 拆解對手產品測知科技創新。</li>
             </ul>
         </div>
     </div>
@@ -397,6 +396,7 @@
                 <div class="flow-arrow"><i class="fa-solid fa-chevron-down"></i></div>
                 <div class="flow-item">5. 規劃中應用情境</div>
             </div>
+            <p style="text-align: center; margin-top: 20px; font-size: 28px; color: var(--secondary-color);">▲ 情境分析程序</p>
         </div>
     </div>
 
@@ -404,11 +404,11 @@
     <div class="slide">
         <h2 class="slide-title">全球偵測：三菱商事案例 (一) 🌐</h2>
         <div class="content-area">
-            <div class="highlight-box" style="font-size: 36px;">
+            <div class="highlight-box" style="font-size: 34px;">
                 <ul>
-                    <li><strong>龐大情報網：</strong> 全球雇用超過 6 萬名分析師（總公司 6 千人）。</li>
-                    <li><strong>人才培力：</strong> 設立全球實習基地，強調現場「臨場感」。</li>
-                    <li><strong>全球視野：</strong> 培養具備全球思維與進修經驗的領導人才。</li>
+                    <li><strong>情報網：</strong> 全球雇用超過 6 萬名分析師。</li>
+                    <li><strong>組織規模：</strong> 總公司 6 千人，關聯企業達 5.6 萬人。</li>
+                    <li><strong>人才培育：</strong> 設立全球實習基地，培養具全球思維之領袖。</li>
                 </ul>
             </div>
         </div>
@@ -418,37 +418,37 @@
     <div class="slide">
         <h2 class="slide-title">全球偵測：三菱商事案例 (二) 🌐</h2>
         <div class="content-area">
-            <div class="highlight-box" style="font-size: 36px;">
+            <div class="highlight-box" style="font-size: 34px;">
                 <ul>
-                    <li><strong>超級聚合體：</strong> 轉型為銀行、智囊、情報中心與企業大學。</li>
-                    <li><strong>對台啟示：</strong> 擺脫代工思維，投入經費掌握主要市場資訊。</li>
-                    <li><strong>資訊投資：</strong> 掌握關鍵原料供應量與價格，維持合理利潤。</li>
+                    <li><strong>轉型：</strong> 轉型為智囊、情報中心與企業大學。</li>
+                    <li><strong>啟示：</strong> 擺脫代工思維。投入經費掌握第一手市場資訊。</li>
                 </ul>
             </div>
         </div>
     </div>
 
-    <!-- Slide 22: 標竿法 (ben.jpg) -->
+    <!-- Slide 22: 標竿法 -->
     <div class="slide">
         <h2 class="slide-title">標竿法：知己知彼 ♟️</h2>
         <div class="content-area">
-            <div style="display:flex; align-items:center; gap:40px;">
+            <div style="display:flex; align-items:center; gap:50px;">
                 <div style="flex:1;"><div class="img-box"><img src="ben.jpg" alt="標竿法" onerror="this.src='https://placehold.co/600x400?text=Benchmarking'"></div></div>
                 <div style="flex:1;">
-                    <p style="font-size: 36px; line-height: 1.6;">與行業中最佳企業比較，發現差距。核心在於<strong>學習與改進流程</strong>。源自全錄 (Xerox) 赴日學習案例。</p>
+                    <p style="font-size: 36px; line-height: 1.6;">與行業中最佳企業比較。核心在於<strong>學習與改進過程</strong>。源自全錄赴日學習案例。</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Slide 23: 第三節轉場 (修正：與其他章節頁一致) -->
+    <!-- Slide 23: 第三節轉場 (修正圖示) -->
     <div class="slide">
-        <div class="content-area section-break-content">
-            <h2>第三節 情報與資訊來源 (P189)</h2>
-            <p style="font-size: 40px; color: var(--secondary-color);">政府、學術、民間與非正式管道</p>
-            <div class="icon-group">
-                <i class="fa-solid fa-folder-open" style="color: #ffca28;"></i>
-                <img src="image_82321d.png" style="width: 250px;" alt="兔子">
+        <div class="content-area">
+            <h2 class="section-header">第三節 情報與資訊來源 (P189)</h2>
+            <p class="section-subheader">政府、學術、民間與非正式管道</p>
+            <div class="section-icons">
+                <span>🏛️</span>
+                <span>🏫</span>
+                <span>🎓</span>
             </div>
         </div>
     </div>
@@ -457,32 +457,31 @@
     <div class="slide">
         <h2 class="slide-title">情報來源：政府資料庫 🎓</h2>
         <div class="content-area">
-            <div class="grid-2x2">
-                <div class="tile"><h3>主計總處</h3><p>普查、薪資就業、歲計預算</p></div>
-                <div class="tile"><h3>經濟部</h3><p>外銷訂單、工業生產、製造投資</p></div>
-                <div class="tile"><h3>地方政府</h3><p>市政統計、歲計會計、年度普查</p></div>
-                <div class="tile"><h3>調查統計</h3><p>人力運用、受僱員工薪資調查</p></div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+                <div class="tile"><h3>主計總處</h3><p>普查、薪資、勞動力調查</p></div>
+                <div class="tile"><h3>經濟部</h3><p>各類產業統計概況</p></div>
+                <div class="tile"><h3>各級政府</h3><p>預算、會計與市政指標</p></div>
+                <div class="tile"><h3>法規公告</h3><p>規範組織之大部分可行範圍</p></div>
             </div>
         </div>
     </div>
 
-    <!-- Slide 25: 學術機構 (p.190) -->
+    <!-- Slide 25: 學術機構 (p190) -->
     <div class="slide">
         <div class="page-memo">p.190</div>
         <h2 class="slide-title">情報來源：學術機構 📖</h2>
         <div class="content-area">
-            <div class="highlight-box" style="font-size: 36px;">
+            <div class="highlight-box" style="font-size: 34px;">
                 <ul>
-                    <li><strong>中研院：</strong> 提供「社會變遷基本調查」與各類景氣數據。</li>
-                    <li><strong>研究機構：</strong> 經濟研究所公布消費者信心指數。</li>
-                    <li><strong>碩博士論文：</strong> 專業領域深度分析的最佳參考來源。</li>
-                    <li><strong>選舉研究中心：</strong> 選民意見與社會動向調查。</li>
+                    <li><strong>中研院：</strong> 提供社會變遷調查與景氣數據。</li>
+                    <li><strong>碩博士論文：</strong> 專業領域深度分析之瑰寶。</li>
+                    <li><strong>研究中心：</strong> 定期發布選民意見調查。</li>
                 </ul>
             </div>
         </div>
     </div>
 
-    <!-- Slide 26: 非正式管道 (p.190) -->
+    <!-- Slide 26: 非正式管道 (p190) -->
     <div class="slide">
         <div class="page-memo">p.190</div>
         <h2 class="slide-title">非正式管道：葡萄藤 🍇</h2>
@@ -490,7 +489,7 @@
             <div style="display:flex; align-items:center; gap:50px;">
                 <div style="flex:1; font-size: 150px; text-align: center;">🗣️👂🤫</div>
                 <div style="flex:1;">
-                    <p style="font-size: 38px; line-height: 1.6;"><strong>(在台灣：小道消息)</strong><br>傳播迅速但易失真。主管應塑造<strong>信任氣候</strong>，建立公開透明制度，消滅謠言溫床。</p>
+                    <p style="font-size: 36px; line-height: 1.6;"><strong>(在台灣：小道消息)</strong><br>訊息越隱密、切身傳播越快。主管應塑造<strong>信任氣候</strong>與公開機制消滅謠言。</p>
                 </div>
             </div>
         </div>
@@ -498,11 +497,11 @@
 
     <!-- Slide 27: 尼爾森 vs 大數據 -->
     <div class="slide">
-        <h2 class="slide-title">民間數據變革：尼爾森的局限 📊</h2>
+        <h2 class="slide-title">民間數據：尼爾森的局限 📊</h2>
         <div class="content-area">
             <div class="highlight-box">
-                <p>傳統 1,800 戶抽樣已存在結構性偏差。</p>
-                <p style="margin-top: 30px; font-size: 34px; font-weight: bold; color: var(--primary-color);">數位機上盒 91% 的足跡數據，代表性遠超傳統抽樣統計。 🐾</p>
+                <p>抽樣偏差 vs. 機上盒 91% 的大數據。</p>
+                <p style="margin-top: 30px; font-size: 34px; font-weight: bold; color: var(--primary-color);">數位時代精確度遠超傳統抽樣統計。 🐾</p>
             </div>
         </div>
     </div>
@@ -512,40 +511,42 @@
         <h2 class="slide-title">改善預測效能的建議 💡</h2>
         <div class="content-area">
             <ul>
-                <li><strong>化繁為簡：</strong> 簡單技術常優於過度運算的複雜方法。</li>
-                <li><strong>勿守成：</strong> 科技時代切勿預設未來不變。</li>
-                <li><strong>交叉互證：</strong> 應參考多種方法，不依賴單一模型。</li>
-                <li><strong>正確長度：</strong> 時間越長正確性越低。</li>
+                <li>簡單技術優於過度運算的複雜方法。</li>
+                <li>勿預設未來不變：科技進步極快。</li>
+                <li>交叉互證，縮短預測時間長度。</li>
             </ul>
         </div>
     </div>
 
-    <!-- Slide 29: 第四節大數據 -->
+    <!-- Slide 29: 第四節 大數據 -->
     <div class="slide">
         <h2 class="slide-title">第四節 數位時代大數據 🌐</h2>
         <div class="content-area">
-            <div class="grid-2x2" style="gap:15px;">
-                <div class="tile"><h3>Volume</h3><p>銀河般巨量資料</p></div>
-                <div class="tile"><h3>Velocity</h3><p>資料生成與累積速快</p></div>
-                <div class="tile"><h3>Variety</h3><p>形式多元(語音照片)</p></div>
-                <div class="tile"><h3>Veracity</h3><p>確認真實性過濾虛假</p></div>
+            <div class="grid-2x2">
+                <div class="tile"><h3>Volume (量)</h3><p>銀河般巨量資料</p></div>
+                <div class="tile"><h3>Velocity (速)</h3><p>生成與流動速快</p></div>
+                <div class="tile"><h3>Variety (多)</h3><p>語音、照片等多樣形式</p></div>
+                <div class="tile"><h3>Veracity (真)</h3><p>確認真實性過濾虛假</p></div>
             </div>
         </div>
     </div>
 
-    <!-- Slide 30: 防疫實例 (dia.jpg) -->
+    <!-- Slide 30: 防疫實例 (放大鏡效果) -->
     <div class="slide">
         <h2 class="slide-title">防疫實例：鑽石公主號 🚢</h2>
         <div class="content-area">
-            <div style="display:flex; align-items:center; gap:40px;">
+            <div style="display:flex; align-items:center; gap:30px;">
                 <div style="flex:1;">
-                    <ul style="font-size: 34px;">
-                        <li>24 小時內生成電子足跡地圖。</li>
-                        <li>交叉驗證 62 萬人手機定位。</li>
-                        <li>結合健保資料庫精準監控新冠病例。</li>
+                    <ul style="font-size: 30px;">
+                        <li>24小時內生成足跡地圖。</li>
+                        <li>交叉驗證 62萬人手機定位。</li>
+                        <li>結合健保系統精準追蹤病例。</li>
                     </ul>
                 </div>
-                <div style="flex:1;"><div class="img-box"><img src="dia.jpg" alt="防疫圖" onerror="this.src='https://placehold.co/600x400?text=Health+Tracking'"></div></div>
+                <div style="flex:2;" class="zoom-area" id="zoom-container">
+                    <div class="lens" id="lens"></div>
+                    <div class="img-box"><img id="dia-img" src="dia.jpg" alt="防疫圖" onerror="this.src='https://placehold.co/600x400?text=Pandemic+Analysis'"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -555,7 +556,7 @@
         <h2 class="slide-title">數據的憂患：隱私與界線 🔒</h2>
         <div class="content-area">
             <div class="highlight-box">
-                <p>隱私保護是大數據發展的關鍵方向。平台應告知數據用途，維護使用者權益。 🐰🐾</p>
+                <p>隱私保護是關鍵。平台應告知數據用途，維護使用者權益。 🐰🐾</p>
             </div>
         </div>
     </div>
@@ -566,7 +567,7 @@
         <div class="content-area">
             <div class="highlight-box">
                 <p><strong>問題：</strong> 環境偵測和預測有何關係？</p>
-                <div class="qa-ans">答：偵測是看清現況趨勢與變數；預測是根據趨勢推演未來景象。沒有偵測，預測將淪為空談。</div>
+                <div class="qa-ans">答：偵測是看清現況趨勢與變數；預測是根據趨勢推演未來景象。</div>
             </div>
         </div>
     </div>
@@ -577,7 +578,7 @@
         <div class="content-area">
             <div class="highlight-box">
                 <p><strong>問題：</strong> 標竿設定如何改善組織的品質？</p>
-                <div class="qa-ans">答：透過學習業界最佳實務，量化差距並制定行動計畫。核心在於比較的過程而非單純模仿。</div>
+                <div class="qa-ans">答：透過學習業界最佳實務，量化差距並制定行動計畫。</div>
             </div>
         </div>
     </div>
@@ -588,13 +589,14 @@
             <img src="image_81d747.png" style="width: 450px; border-radius: 40px; margin-bottom: 30px;" alt="結語">
             <h1>謝謝各位的聆聽！</h1>
             <p style="font-size: 32px; margin-top: 15px;">報告人：林宛儀 NB41F010 🐇</p>
-            <div style="margin-top: 50px; font-size: 100px;">🥕 🐰 🥕</div>
+            <div style="margin-top: 40px; font-size: 100px;">🥕 🐰 🥕</div>
         </div>
     </div>
 
 </div>
 
 <script>
+    // 1. 更新時鐘
     function updateClock() {
         const now = new Date();
         const h = String(now.getHours()).padStart(2, '0');
@@ -602,9 +604,9 @@
         const s = String(now.getSeconds()).padStart(2, '0');
         document.getElementById('live-clock').innerText = `${h}:${m}:${s}`;
     }
-    setInterval(updateClock, 1000);
-    updateClock();
+    setInterval(updateClock, 1000); updateClock();
 
+    // 2. 簡報控制
     const slides = document.querySelectorAll('.slide');
     const pageNum = document.getElementById('page-num');
     let currentSlide = 0;
@@ -622,38 +624,44 @@
         if (answer && answer.style.display === 'none') {
             answer.style.display = 'block';
         } else {
-            if (currentSlide < slides.length - 1) {
-                currentSlide++;
-                showSlide(currentSlide);
-            }
+            if (currentSlide < slides.length - 1) { currentSlide++; showSlide(currentSlide); }
         }
     }
 
-    function prevAction() {
-        if (currentSlide > 0) {
-            currentSlide--;
-            showSlide(currentSlide);
-        }
-    }
+    function prevAction() { if (currentSlide > 0) { currentSlide--; showSlide(currentSlide); } }
 
     window.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
-            e.preventDefault();
-            nextAction();
-        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-            e.preventDefault();
-            prevAction();
-        }
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); nextAction(); }
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); prevAction(); }
     });
 
     function handleGlobalClick(e) {
+        if (e.target.closest('#zoom-container')) return; // 點擊放大鏡區域不換頁
         const width = window.innerWidth;
-        if (e.clientX > width / 2) {
-            nextAction();
-        } else {
-            prevAction();
-        }
+        if (e.clientX > width / 2) nextAction(); else prevAction();
     }
+
+    // 3. 放大鏡效果 (Slide 30)
+    const zoomArea = document.getElementById('zoom-container');
+    const lens = document.getElementById('lens');
+    const img = document.getElementById('dia-img');
+
+    zoomArea.addEventListener('mousemove', (e) => {
+        lens.style.visibility = 'visible';
+        const rect = zoomArea.getBoundingClientRect();
+        let x = e.clientX - rect.left;
+        let y = e.clientY - rect.top;
+        
+        lens.style.left = (x - lens.offsetWidth / 2) + 'px';
+        lens.style.top = (y - lens.offsetHeight / 2) + 'px';
+        
+        const zoom = 2.5; // 放大倍率
+        lens.style.backgroundImage = `url(${img.src})`;
+        lens.style.backgroundSize = (rect.width * zoom) + 'px ' + (rect.height * zoom) + 'px';
+        lens.style.backgroundPosition = `-${(x * zoom) - lens.offsetWidth / 2}px -${(y * zoom) - lens.offsetHeight / 2}px`;
+    });
+
+    zoomArea.addEventListener('mouseleave', () => lens.style.visibility = 'hidden');
 
     showSlide(0);
 </script>
