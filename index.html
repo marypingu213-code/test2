@@ -272,10 +272,10 @@
         </div>
     </div>
 
-    <!-- Slide 10: 資訊需求分析 (已刪除舊的多餘頁面) -->
+    <!-- Slide 10: 資訊需求分析 -->
     <div class="slide">
         <div class="page-memo">p.178</div>
-        <h2 class="slide-title">資訊需求分析 🎯</h2>
+        <h2 class="slide-title">分析資訊需求 🎯</h2>
         <div class="content-area">
             <div class="grid-2x2">
                 <div class="tile"><h3>功能部門差異 (實例)</h3><p>特教老師需要學生的IEP行為數據；校務行政端更關注年度預算執行率。</p></div>
@@ -310,12 +310,12 @@
                 <p style="font-size: 42px; line-height: 1.5;">加總細部資料，<br>形成<strong>整體發展的策略方向</strong>。</p>
             </div>
             <div class="edu-example">
-                <p><strong>💡 教育實例：</strong><br>校長彙整各處室與導師的回報數據，統整出全校年度的重點發展戰略與招生方向。</p>
+                <p><strong>💡 教育實例：</strong><br>校長結合各處室的匯報，統整出學校校本課程的走向及學校特色。</p>
             </div>
         </div>
     </div>
 
-    <!-- Slide 13: 系統進化 (增加教育實例) -->
+    <!-- Slide 13: 系統進化 -->
     <div class="slide">
         <h2 class="slide-title">資訊處理系統的進化 🚀</h2>
         <div class="content-area">
@@ -326,7 +326,7 @@
                 <div class="tile" style="padding: 20px;"><i class="fa-solid fa-tower-broadcast"></i><h3>行動通訊</h3><p>人與人的時空距離，不再成為問題</p></div>
             </div>
             <div class="edu-example">
-                <p><strong>💡 教育實例：</strong><br>運用雲端運算，特教教師可跨處室即時共編 IEP；透過行動通訊，親師溝通不再受限於家庭聯絡簿，能隨時掌握學生狀況。</p>
+                <p><strong>💡 教育實例：</strong><br>運用雲端運算，特教教師可透過共編撰寫 IEP；透過行動通訊，利用 LINE@ 增進親師溝通，即時掌握學生狀況。</p>
             </div>
         </div>
     </div>
@@ -341,7 +341,7 @@
                 <li><strong>穩定可信：</strong> 無情緒波動、不生病、不偷懶。</li>
             </ul>
             <div class="edu-example">
-                <p><strong>💡 教育實例：</strong><br>導入特教生情緒辨識專家系統，分析學生生理與表情特徵，穩定提供介入建議，不受教師主觀疲勞影響。</p>
+                <p><strong>💡 教育實例：</strong><br>教師可結合 AI 專家系統協助設計適性化課程與教材，為不同學習需求的學生提供精準的教學建議。</p>
             </div>
         </div>
     </div>
@@ -386,7 +386,7 @@
         </div>
     </div>
 
-    <!-- Slide 18: 環境偵測 (增加教育實例) -->
+    <!-- Slide 18: 環境偵測 -->
     <div class="slide">
         <h2 class="slide-title">環境偵測：掃描大環境 📡</h2>
         <div class="content-area">
@@ -401,7 +401,7 @@
         </div>
     </div>
 
-    <!-- Slide 19: 未來景象預測法 (增加教育實例) -->
+    <!-- Slide 19: 未來景象預測法 (已移除實例) -->
     <div class="slide">
         <h2 class="slide-title">未來景象預測法 (Scenario) 🔮</h2>
         <div class="content-area">
@@ -416,9 +416,7 @@
                 <div class="flow-arrow"><i class="fa-solid fa-chevron-down"></i></div>
                 <div class="flow-item">5. 規劃中應用情境</div>
             </div>
-            <div class="edu-example" style="margin-top: 15px; padding: 15px;">
-                <p style="font-size: 26px;"><strong>💡 教育實例：</strong><br>針對「特教生人數逐年攀升」的發展情境，學校可預先規畫增設資源班、無障礙設施及相關經費預算。</p>
-            </div>
+            <p style="text-align: center; margin-top: 20px; font-size: 28px; color: var(--secondary-color);">▲ 情境分析程序</p>
         </div>
     </div>
 
@@ -683,11 +681,18 @@
 
     function nextAction() {
         const activeSlide = slides[currentSlide];
+        
+        // 處理 QA 答案顯示
         const answer = activeSlide.querySelector('.qa-ans');
         if (answer && answer.style.display === 'none') {
             answer.style.display = 'block';
-        } else {
-            if (currentSlide < slides.length - 1) { currentSlide++; showSlide(currentSlide); }
+            return;
+        } 
+        
+        // 正常換頁
+        if (currentSlide < slides.length - 1) { 
+            currentSlide++; 
+            showSlide(currentSlide); 
         }
     }
 
