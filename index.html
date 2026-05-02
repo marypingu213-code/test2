@@ -11,11 +11,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
-            --primary-color: #d81b60;
-            --secondary-color: #f06292;
-            --bg-color: #fffaf0;
-            --accent-color: #fce4ec;
-            --text-dark: #4a4a4a;
+            /* 更換為更舒適的藍色專業色調 */
+            --primary-color: #1565c0;
+            --secondary-color: #42a5f5;
+            --bg-color: #f8f9fa;
+            --accent-color: #e3f2fd;
+            --text-dark: #2c3e50;
             --title-size: 64px;
         }
 
@@ -23,7 +24,7 @@
         * { box-sizing: border-box; }
         body, html {
             margin: 0; padding: 0; height: 100%; width: 100%;
-            background-color: #333;
+            background-color: #222;
             font-family: 'Klee One', 'Noto Sans TC', sans-serif;
             overflow: hidden;
             text-justify: inter-character;
@@ -47,7 +48,7 @@
 
         .slide.active { display: flex; z-index: 10; }
 
-        /* UI 元素 */
+        /* 左下角時鐘 */
         #live-clock {
             position: fixed; bottom: 30px; left: 30px; 
             background: var(--primary-color); color: white;
@@ -56,17 +57,18 @@
             font-size: 24px; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
+        /* 右下角頁數 */
         #page-num {
             position: fixed; bottom: 30px; right: 30px;
             font-family: 'Quicksand', sans-serif; font-size: 24px; color: var(--primary-color);
             background: white; padding: 8px 30px; border-radius: 40px; 
             z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            border: 2px solid var(--accent-color);
+            border: 2px solid var(--secondary-color);
         }
 
         .page-memo {
             position: absolute; top: 30px; right: 50px;
-            font-size: 28px; color: var(--secondary-color);
+            font-size: 28px; color: var(--primary-color);
             font-weight: bold; background: white;
             padding: 8px 20px; border-radius: 10px;
             border: 2px solid var(--accent-color);
@@ -104,7 +106,7 @@
         
         ul { list-style: none; padding: 0; }
         li { font-size: 38px; margin-bottom: 25px; padding-left: 70px; position: relative; color: var(--text-dark); line-height: 1.5; }
-        li::before { content: '🐰'; position: absolute; left: 0; top: 5px; }
+        li::before { content: '🐾'; position: absolute; left: 0; top: 5px; color: var(--secondary-color); }
 
         h1 { font-size: 110px; color: var(--primary-color); margin: 0; text-align: center; font-weight: 600; }
         .author { font-size: 40px; color: var(--text-dark); font-weight: bold; text-align: center; margin-top: 50px; }
@@ -173,7 +175,7 @@
         <div class="content-area">
             <div class="highlight-box">
                 <p>政府長期忽視人口成長趨緩警訊。</p>
-                <p style="margin-top: 30px;"><strong>後果：</strong> 師範體系持續培育教師，但系統不再吸納，導致流浪教師社會問題。招生不足令資源分配面臨困難。 🐰💔</p>
+                <p style="margin-top: 30px;"><strong>後果：</strong> 師範體系持續培育教師，但系統已無法吸納，導致流浪教師社會問題。招生不足令資源分配面臨困難。 🐰💔</p>
             </div>
         </div>
     </div>
@@ -267,16 +269,21 @@
         </div>
     </div>
 
-    <!-- Slide 10: 資訊需求分析 (p.178 / 教育實例) -->
+    <!-- Slide 10: 資訊需求分析 (修正順序：理論 -> 實例) -->
     <div class="slide">
         <div class="page-memo">p.178</div>
         <h2 class="slide-title">資訊需求分析 🎯</h2>
         <div class="content-area">
-            <div class="grid-2x2">
-                <div class="tile"><h3>功能部門差異</h3><p>特教老師需要學生的IEP行為數據；校務行政端更關注年度預算執行率。</p></div>
-                <div class="tile"><h3>層級差異</h3><p>導師需要個別學生的缺曠課細節；校長需要全校招生的綜合統計報告。</p></div>
+            <!-- 理論基礎優先呈現 -->
+            <div class="highlight-box" style="margin-bottom: 40px; font-size: 32px; padding: 30px;">
+                <p><strong>理論基礎：</strong> 管理資訊系統的設計，必須針對不同部門之不同的資訊需求，主管的資訊需求也會隨組織層級而有所不同。</p>
             </div>
-            <p style="text-align: center; font-size: 38px; color: var(--primary-color); font-weight: bold; margin-top: 40px;">系統設計必須針對特定教育角色客製化。</p>
+            
+            <div class="grid-2x2">
+                <div class="tile"><h3>功能部門差異 (實例)</h3><p>特教老師需要學生的IEP行為數據；校務行政端更關注年度預算執行率。</p></div>
+                <div class="tile"><h3>層級差異 (實例)</h3><p>導師需要個別學生的缺曠課細節；校長需要全校招生的綜合統計報告。</p></div>
+            </div>
+            <p style="text-align: center; font-size: 36px; color: var(--primary-color); font-weight: bold; margin-top: 30px;">系統設計必須針對教育現場角色客製化。</p>
         </div>
     </div>
 
@@ -297,9 +304,9 @@
         <div class="page-memo">p.179</div>
         <h2 class="slide-title">整合決策：縱觀全局 🔗</h2>
         <div class="content-area">
-            <div class="bold-border">
+            <div class="bold-border" style="border-width: 15px;">
                 <h3 style="font-size: 50px; color: var(--primary-color); margin-bottom: 20px;">高階主管</h3>
-                <p style="font-size: 42px; line-height: 1.5;">由細部資料整理加總，<br>形成<strong>整體發展的策略方向</strong>。</p>
+                <p style="font-size: 42px; line-height: 1.5;">加總細部資料，<br>形成<strong>整體發展的策略方向</strong>。</p>
             </div>
         </div>
     </div>
@@ -342,7 +349,7 @@
         </div>
     </div>
 
-    <!-- Slide 16: 偵蒐目的 -->
+    <!-- Slide 16: 偵蒐目的 (3x2 網格) -->
     <div class="slide">
         <h2 class="slide-title">偵蒐的六大目的 🎯</h2>
         <div class="content-area">
@@ -363,7 +370,7 @@
             <h2 class="section-header">第二節 評估環境的技術 (P182)</h2>
             <p class="section-subheader">環境偵測、預測與標竿設定技術</p>
             <div class="section-icons">
-                <i class="fa-solid fa-user-tie" style="color: #6d4c41;"></i>
+                <i class="fa-solid fa-user-tie" style="color: var(--primary-color);"></i>
                 <span>👨‍💼</span>
             </div>
         </div>
@@ -434,7 +441,7 @@
             <div style="display:flex; align-items:center; gap:50px;">
                 <div style="flex:1;"><div class="img-box"><img src="ben.jpg" alt="標竿法" onerror="this.src='https://placehold.co/600x400?text=Benchmarking'"></div></div>
                 <div style="flex:1;">
-                    <p style="font-size: 36px; line-height: 1.6;">與行業中最佳企業比較。核心在於<strong>學習與改進過程</strong>。源自全錄赴日學習案例。</p>
+                    <p style="font-size: 36px; line-height: 1.6;">與行業中最佳企業比較。關鍵在於<strong>學習與改進過程</strong>。源自全錄赴日學習案例。</p>
                 </div>
             </div>
         </div>
@@ -501,7 +508,7 @@
         <div class="content-area">
             <div class="highlight-box">
                 <p>抽樣偏差 vs. 機上盒 91% 的大數據。</p>
-                <p style="margin-top: 30px; font-size: 34px; font-weight: bold; color: var(--primary-color);">數位時代精確度遠超傳統抽樣統計。 🐾</p>
+                <p style="margin-top: 30px; font-size: 34px; font-weight: bold; color: var(--primary-color);">數位時代精確度遠超傳統抽樣統計。</p>
             </div>
         </div>
     </div>
@@ -512,7 +519,7 @@
         <div class="content-area">
             <ul>
                 <li>簡單技術優於過度運算的複雜方法。</li>
-                <li>勿預設未來不變：科技進步極快。</li>
+                <li>勿預設未來不變：科技變動極快。</li>
                 <li>交叉互證，縮短預測時間長度。</li>
             </ul>
         </div>
@@ -556,7 +563,7 @@
         <h2 class="slide-title">數據的憂患：隱私與界線 🔒</h2>
         <div class="content-area">
             <div class="highlight-box">
-                <p>隱私保護是關鍵。平台應告知數據用途，維護使用者權益。 🐰🐾</p>
+                <p>隱私保護是關鍵。平台應告知數據用途，維護使用者權益。 🐾</p>
             </div>
         </div>
     </div>
@@ -572,13 +579,16 @@
         </div>
     </div>
 
-    <!-- Slide 33: QA 2 -->
+    <!-- Slide 33: QA 2 (教育實例) -->
     <div class="slide">
         <h2 class="slide-title">Q&A 互動時間 (2) 🐰❓</h2>
         <div class="content-area">
-            <div class="highlight-box">
+            <div class="highlight-box" style="font-size: 34px;">
                 <p><strong>問題：</strong> 標竿設定如何改善組織的品質？</p>
-                <div class="qa-ans">答：透過學習業界最佳實務，量化差距並制定行動計畫。</div>
+                <div class="qa-ans">
+                    <p>答：透過學習業界最佳實務，量化差距並制定行動計畫。</p>
+                    <p style="margin-top: 15px; color: var(--primary-color); font-weight: bold;">教育實例：如資源班可參考優質學校的「個別化教學流程」或「親師溝通模組」，找出成效差距並內化為本校標準作業程序。</p>
+                </div>
             </div>
         </div>
     </div>
@@ -588,7 +598,7 @@
         <div class="content-area" style="align-items: center;">
             <img src="image_81d747.png" style="width: 450px; border-radius: 40px; margin-bottom: 30px;" alt="結語">
             <h1>謝謝各位的聆聽！</h1>
-            <p style="font-size: 32px; margin-top: 15px;">報告人：林宛儀 NB41F010 🐇</p>
+            <p style="font-size: 28px; margin-top: 15px;">報告人：林宛儀 NB41F010 🐇</p>
             <div style="margin-top: 40px; font-size: 100px;">🥕 🐰 🥕</div>
         </div>
     </div>
@@ -596,7 +606,6 @@
 </div>
 
 <script>
-    // 1. 更新時鐘
     function updateClock() {
         const now = new Date();
         const h = String(now.getHours()).padStart(2, '0');
@@ -606,7 +615,6 @@
     }
     setInterval(updateClock, 1000); updateClock();
 
-    // 2. 簡報控制
     const slides = document.querySelectorAll('.slide');
     const pageNum = document.getElementById('page-num');
     let currentSlide = 0;
@@ -636,12 +644,11 @@
     });
 
     function handleGlobalClick(e) {
-        if (e.target.closest('#zoom-container')) return; // 點擊放大鏡區域不換頁
+        if (e.target.closest('#zoom-container')) return; 
         const width = window.innerWidth;
         if (e.clientX > width / 2) nextAction(); else prevAction();
     }
 
-    // 3. 放大鏡效果 (Slide 30)
     const zoomArea = document.getElementById('zoom-container');
     const lens = document.getElementById('lens');
     const img = document.getElementById('dia-img');
@@ -655,7 +662,7 @@
         lens.style.left = (x - lens.offsetWidth / 2) + 'px';
         lens.style.top = (y - lens.offsetHeight / 2) + 'px';
         
-        const zoom = 2.5; // 放大倍率
+        const zoom = 2.5; 
         lens.style.backgroundImage = `url(${img.src})`;
         lens.style.backgroundSize = (rect.width * zoom) + 'px ' + (rect.height * zoom) + 'px';
         lens.style.backgroundPosition = `-${(x * zoom) - lens.offsetWidth / 2}px -${(y * zoom) - lens.offsetHeight / 2}px`;
