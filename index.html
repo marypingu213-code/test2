@@ -97,8 +97,8 @@
         .def-box h3 { font-size: 44px; color: var(--primary-color); margin: 0 0 15px 0; }
         .def-box p { font-size: 30px; color: var(--text-dark); margin: 0; line-height: 1.4; }
 
-        .tile { background: white; padding: 30px; border-radius: 30px; border: 4px solid var(--accent-color); text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative; }
-        .tile h3 { font-size: 40px; color: var(--primary-color); margin-bottom: 10px; }
+        .tile { background: white; padding: 30px; border-radius: 30px; border: 4px solid var(--accent-color); text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative; display: flex; flex-direction: column; justify-content: center; }
+        .tile h3 { font-size: 40px; color: var(--primary-color); margin-bottom: 10px; line-height: 1.2;}
         .tile p { font-size: 30px; color: var(--text-dark); margin: 0; }
         .order-tag { position: absolute; top: 10px; left: 20px; font-weight: bold; color: var(--secondary-color); font-size: 24px; }
 
@@ -115,24 +115,31 @@
         .img-box { width: 100%; border-radius: 25px; overflow: hidden; border: 8px solid white; box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
         .img-box img { width: 100%; height: auto; display: block; }
 
-        /* 轉場頁 */
+        /* 轉場頁樣式 */
         .section-header { font-size: 90px; color: var(--primary-color); text-align: center; margin: 0; }
         .section-subheader { font-size: 50px; color: var(--secondary-color); text-align: center; margin-top: 20px; }
         .section-icons { font-size: 150px; display: flex; justify-content: center; gap: 50px; margin-top: 50px; align-items: center; }
 
-        /* QA 互動樣式 */
+        /* 互動樣式 */
         .qa-ans { margin-top: 30px; padding: 30px; background: white; border-radius: 20px; display: none; border-left: 15px solid var(--primary-color); font-size: 38px; }
 
         /* 流程圖 Slide 19 */
         .flow-path { display: flex; flex-direction: column; align-items: center; gap: 10px; }
         .flow-item { background: white; border: 5px solid var(--secondary-color); padding: 15px 60px; border-radius: 20px; font-size: 40px; font-weight: bold; width: 750px; text-align: center; }
         .flow-arrow { font-size: 35px; color: var(--primary-color); }
+        
+        /* 標竿法流程表格 Slide 23 */
+        .grid-3x3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; }
+        
+        .edu-example-box {
+            margin-top: 30px; padding-top: 20px; border-top: 3px dashed var(--secondary-color);
+        }
     </style>
 </head>
 <body onclick="handleGlobalClick(event)">
 
 <div id="live-clock">00:00:00</div>
-<div id="page-num">1 / 34</div>
+<div id="page-num">1 / 35</div>
 
 <div class="slider">
 
@@ -171,7 +178,7 @@
         </div>
     </div>
 
-    <!-- Slide 4: 大數據 (p.175) -->
+    <!-- Slide 4: 大數據 (p175) -->
     <div class="slide">
         <div class="page-memo">p.175</div>
         <h2 class="slide-title">數位時代的大數據浪潮 💻</h2>
@@ -188,7 +195,7 @@
         </div>
     </div>
 
-    <!-- Slide 5: 第一節 定義 (修正：Emoji 彩色且大) -->
+    <!-- Slide 5: 第一節 定義 -->
     <div class="slide">
         <h2 class="slide-title">第一節 情蒐與偵測的定義 🔍</h2>
         <div class="content-area">
@@ -196,7 +203,7 @@
                 <div class="def-box">
                     <i class="fa-solid fa-folder-open" style="color: #ffa000;"></i>
                     <h3>情蒐</h3>
-                    <p>Information Gathering<br>重視資料的收集與建檔。</p>
+                    <p>Information Gathering<br>重視資料的廣泛收集與建檔。</p>
                 </div>
                 <div class="def-box">
                     <i class="fa-solid fa-magnifying-glass-chart" style="color: #1e88e5;"></i>
@@ -208,7 +215,7 @@
         </div>
     </div>
 
-    <!-- Slide 6: 第二節 環境認知 (依 1234 順序) -->
+    <!-- Slide 6: 第二節 環境認知 -->
     <div class="slide">
         <div class="page-memo">p.176</div>
         <h2 class="slide-title">環境認知 🧠</h2>
@@ -236,14 +243,18 @@
         </div>
     </div>
 
-    <!-- Slide 8: 內部因素 (民主模式) -->
+    <!-- Slide 8: 內部因素 (加入教育實例) -->
     <div class="slide">
         <h2 class="slide-title">內部因素：組織文化 🏠</h2>
         <div class="content-area">
             <div class="highlight-box">
                 <p style="font-size: 46px; color: var(--primary-color); font-weight: bold;">威權 vs. 民主：</p>
                 <p>軍職威權文化 vs. 證券投資業全員民主參與模式。</p>
-                <p style="margin-top: 30px; font-size: 34px;">領導風格（開明或專制）深刻決定資訊解讀效率。</p>
+                <p style="margin-top: 25px; font-size: 34px;">領導風格（開明或專制）深刻決定資訊解讀效率。</p>
+                
+                <div class="edu-example-box">
+                    <p style="font-size: 32px; color: var(--primary-color); margin: 0;"><strong>💡 教育實例：</strong>校長若採威權領導，教師僅被動接受指令；若採民主參與（如校務會議共同決策），教師能主動回報學生需求，大幅提升資訊流通與決策品質。</p>
+                </div>
             </div>
         </div>
     </div>
@@ -260,21 +271,22 @@
         </div>
     </div>
 
-    <!-- Slide 10: 資訊需求分析 (修正：版面下移) -->
+    <!-- Slide 10: 資訊需求分析 (點擊出現例子) -->
     <div class="slide">
         <div class="page-memo">p.178</div>
-        <h2 class="slide-title">分析資訊需求 🎯</h2>
-        <div class="content-area" style="padding-top: 80px;">
-            <!-- 理論基礎優先呈現 -->
+        <h2 class="slide-title">資訊來源：分析資訊需求 🎯</h2>
+        <div class="content-area" style="padding-top: 50px;">
             <div class="highlight-box" style="margin-bottom: 40px; font-size: 32px; padding: 30px;">
                 <p><strong>理論基礎：</strong> 管理資訊系統的設計，必須針對不同部門之不同的資訊需求，主管的資訊需求也會隨組織層級而有所不同。</p>
             </div>
             
-            <div class="grid-2x2">
+            <!-- 隱藏的實例區塊，點擊後出現 -->
+            <div class="grid-2x2 step-item step-hidden" data-display="grid" style="opacity: 0; display: none; transition: opacity 0.5s ease;">
                 <div class="tile"><h3>功能部門差異 (實例)</h3><p>特教老師需要學生的IEP行為數據；校務行政端更關注年度預算執行率。</p></div>
                 <div class="tile"><h3>層級差異 (實例)</h3><p>導師需要個別學生的缺曠課細節；校長需要全校招生的綜合統計報告。</p></div>
             </div>
-            <p style="text-align: center; font-size: 36px; color: var(--primary-color); font-weight: bold; margin-top: 30px;">系統設計必須針對教育現場角色客製化。</p>
+            
+            <p class="step-item step-hidden" data-display="block" style="text-align: center; font-size: 36px; color: var(--primary-color); font-weight: bold; margin-top: 30px; opacity: 0; display: none; transition: opacity 0.5s ease;">系統設計必須針對教育現場角色客製化。</p>
         </div>
     </div>
 
@@ -310,7 +322,7 @@
                 <div class="tile"><i class="fa-solid fa-cloud-bolt"></i><h3>雲端運算</h3><p>解放時空限制</p></div>
                 <div class="tile"><i class="fa-solid fa-vr-cardboard"></i><h3>虛擬實境</h3><p>跨國交流零距離</p></div>
                 <div class="tile"><i class="fa-solid fa-brain"></i><h3>專家系統</h3><p>AI 學習專家經驗</p></div>
-                <div class="tile"><i class="fa-solid fa-tower-broadcast"></i><h3>行動通訊</h3><p>全時空機動決策</p></div>
+                <div class="tile"><i class="fa-solid fa-tower-broadcast"></i><h3>行動通訊</h3><p>人與人的時空距離，<br>不再成為問題</p></div>
             </div>
         </div>
     </div>
@@ -355,7 +367,7 @@
         </div>
     </div>
 
-    <!-- Slide 17: 第二節轉場 (修正圖示) -->
+    <!-- Slide 17: 第二節轉場 -->
     <div class="slide">
         <div class="content-area">
             <h2 class="section-header">第二節 評估環境的技術 (P182)</h2>
@@ -438,7 +450,26 @@
         </div>
     </div>
 
-    <!-- Slide 23: 第三節轉場 (修正圖示) -->
+    <!-- Slide 23: (新增) 標竿法流程圖表 -->
+    <div class="slide">
+        <h2 class="slide-title">標竿管理的流程步驟 📝</h2>
+        <div class="content-area">
+            <div class="grid-3x3">
+                <div class="tile" style="padding: 25px;"><h3>1. 決定對象</h3></div>
+                <div class="tile" style="padding: 25px;"><h3>2. 資料取得方法</h3></div>
+                <div class="tile" style="padding: 25px;"><h3>3. 績效量度單位</h3></div>
+                <div class="tile" style="padding: 25px;"><h3>4. 未來績效等級</h3></div>
+                <div class="tile" style="padding: 25px;"><h3>5. 公布調查結果</h3></div>
+                <div class="tile" style="padding: 25px;"><h3>6. 建立實用目標</h3></div>
+                <div class="tile" style="padding: 25px;"><h3>7. 發展活動計畫</h3></div>
+                <div class="tile" style="padding: 25px;"><h3>8. 執行與監控</h3></div>
+                <div class="tile" style="padding: 25px;"><h3>9. 調整標竿管理</h3></div>
+            </div>
+            <p style="text-align: center; margin-top: 40px; font-size: 38px; color: var(--primary-color); font-weight: bold;">核心在於比較的過程，看見差距並融合至經營計畫。</p>
+        </div>
+    </div>
+
+    <!-- Slide 24: 第三節轉場 -->
     <div class="slide">
         <div class="content-area">
             <h2 class="section-header">第三節 情報與資訊來源 (P189)</h2>
@@ -451,11 +482,11 @@
         </div>
     </div>
 
-    <!-- Slide 24: 政府來源 -->
+    <!-- Slide 25: 政府來源 -->
     <div class="slide">
         <h2 class="slide-title">情報來源：政府資料庫 🎓</h2>
         <div class="content-area">
-            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+            <div class="grid-2x2">
                 <div class="tile"><h3>主計總處</h3><p>普查、薪資、勞動力調查</p></div>
                 <div class="tile"><h3>經濟部</h3><p>各類產業統計概況</p></div>
                 <div class="tile"><h3>各級政府</h3><p>預算、會計與市政指標</p></div>
@@ -464,7 +495,7 @@
         </div>
     </div>
 
-    <!-- Slide 25: 學術機構 (p190) -->
+    <!-- Slide 26: 學術機構 (p190) -->
     <div class="slide">
         <div class="page-memo">p.190</div>
         <h2 class="slide-title">情報來源：學術機構 📖</h2>
@@ -479,7 +510,7 @@
         </div>
     </div>
 
-    <!-- Slide 26: 非正式管道 (修正：信任關係) -->
+    <!-- Slide 27: 非正式管道 (加入教育實例) -->
     <div class="slide">
         <div class="page-memo">p.190</div>
         <h2 class="slide-title">非正式管道：葡萄藤 🍇</h2>
@@ -488,14 +519,18 @@
                 <div style="flex:1; font-size: 150px; text-align: center;">🗣️👂🤫</div>
                 <div style="flex:1;">
                     <p style="font-size: 36px; line-height: 1.6;"><strong>(在台灣：小道消息)</strong><br>訊息越隱密、切身傳播越快。主管應塑造<strong>信任關係</strong>與公開機制消滅謠言。</p>
+                    
+                    <div style="margin-top: 30px; background: white; padding: 25px; border-radius: 20px; border-left: 8px solid var(--secondary-color); box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                        <p style="font-size: 28px; margin: 0; color: var(--primary-color);"><strong>💡 教育實例：</strong><br>學校若未公開資源班減班或代課老師聘任標準，極易引發家長與教師間的不安耳語。唯有資訊透明才能消弭謠言。</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Slide 27: 尼爾森 vs 大數據 (修正：更具體補充 4V 概念) -->
+    <!-- Slide 28: 尼爾森 vs 大數據 -->
     <div class="slide">
-        <h2 class="slide-title">民間數據：尼爾森的局限 📊</h2>
+        <h2 class="slide-title">民間數據變革：尼爾森的局限 📊</h2>
         <div class="content-area">
             <div class="highlight-box" style="font-size: 32px; padding: 40px;">
                 <p><strong>結構偏差：</strong> 傳統抽樣 1,800 戶與 21 世紀數位機上盒 91.10% 的高普及率相比，存在巨大調查誤差。</p>
@@ -508,7 +543,7 @@
         </div>
     </div>
 
-    <!-- Slide 28: 改善預測建議 -->
+    <!-- Slide 29: 改善預測建議 -->
     <div class="slide">
         <h2 class="slide-title">改善預測效能的建議 💡</h2>
         <div class="content-area">
@@ -520,7 +555,7 @@
         </div>
     </div>
 
-    <!-- Slide 29: 第四節 大數據 -->
+    <!-- Slide 30: 第四節 大數據 -->
     <div class="slide">
         <h2 class="slide-title">第四節 數位時代大數據 🌐</h2>
         <div class="content-area">
@@ -533,7 +568,7 @@
         </div>
     </div>
 
-    <!-- Slide 30: 防疫實例 (修正：移除放大鏡) -->
+    <!-- Slide 31: 防疫實例 -->
     <div class="slide">
         <h2 class="slide-title">防疫實例：鑽石公主號 🚢</h2>
         <div class="content-area">
@@ -552,7 +587,7 @@
         </div>
     </div>
 
-    <!-- Slide 31: 隱私保護 -->
+    <!-- Slide 32: 隱私保護 -->
     <div class="slide">
         <h2 class="slide-title">數據的憂患：隱私與界線 🔒</h2>
         <div class="content-area">
@@ -562,7 +597,7 @@
         </div>
     </div>
 
-    <!-- Slide 32: QA 1 -->
+    <!-- Slide 33: QA 1 -->
     <div class="slide">
         <h2 class="slide-title">Q&A 互動時間 (1) 🐰❓</h2>
         <div class="content-area">
@@ -573,7 +608,7 @@
         </div>
     </div>
 
-    <!-- Slide 33: QA 2 (修正：教育實例更新) -->
+    <!-- Slide 34: QA 2 (教育實例) -->
     <div class="slide">
         <h2 class="slide-title">Q&A 互動時間 (2) 🐰❓</h2>
         <div class="content-area">
@@ -587,7 +622,7 @@
         </div>
     </div>
 
-    <!-- Slide 34: 結語頁 -->
+    <!-- Slide 35: 結語頁 -->
     <div class="slide">
         <div class="content-area" style="align-items: center;">
             <img src="image_81d747.png" style="width: 450px; border-radius: 40px; margin-bottom: 30px;" alt="結語">
@@ -617,16 +652,42 @@
         slides.forEach(s => s.classList.remove('active'));
         slides[index].classList.add('active');
         pageNum.innerText = `${index + 1} / ${slides.length}`;
+        
+        // 重置 QA 答案
         document.querySelectorAll('.qa-ans').forEach(ans => ans.style.display = 'none');
+        
+        // 重置點擊步驟
+        document.querySelectorAll('.step-item').forEach(item => {
+            item.classList.add('step-hidden');
+            item.style.opacity = '0';
+            item.style.display = 'none';
+        });
     }
 
     function nextAction() {
         const activeSlide = slides[currentSlide];
+        
+        // 1. 處理點擊顯示的步驟 (Slide 10)
+        const hiddenStep = activeSlide.querySelector('.step-hidden');
+        if (hiddenStep) {
+            hiddenStep.classList.remove('step-hidden');
+            hiddenStep.style.display = hiddenStep.dataset.display || 'block';
+            void hiddenStep.offsetWidth; // 觸發 reflow 以執行過渡動畫
+            hiddenStep.style.opacity = '1';
+            return; // 停在這裡，不要切換下一頁
+        }
+
+        // 2. 處理 QA 答案顯示
         const answer = activeSlide.querySelector('.qa-ans');
         if (answer && answer.style.display === 'none') {
             answer.style.display = 'block';
-        } else {
-            if (currentSlide < slides.length - 1) { currentSlide++; showSlide(currentSlide); }
+            return;
+        } 
+        
+        // 3. 正常切換下一頁
+        if (currentSlide < slides.length - 1) { 
+            currentSlide++; 
+            showSlide(currentSlide); 
         }
     }
 
