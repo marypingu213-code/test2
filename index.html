@@ -179,6 +179,34 @@
         .char-tile p { font-size: 26px; color: var(--text-dark); margin: 0; line-height: 1.4; }
 
         .tag-blue { background: var(--primary-color); color: white; border-radius: 8px; padding: 3px 12px; font-size: 22px; display: inline-block; margin-bottom: 6px; }
+
+        /* ======== 加入匯出 PDF 列印專用樣式 ======== */
+        @media print {
+            body, html, .slider {
+                overflow: visible !important;
+                height: auto !important;
+                background-color: var(--bg-color) !important;
+            }
+            .slide {
+                position: relative !important;
+                display: flex !important; /* 強制所有投影片顯示 */
+                opacity: 1 !important;
+                page-break-after: always; /* 確保每張投影片獨立一頁 */
+                height: 100vh !important;
+                width: 100vw !important;
+                padding: 40px !important;
+            }
+            /* 強制顯示所有隱藏的動畫內容與解答 */
+            .step-item, .qa-ans {
+                display: flex !important;
+                opacity: 1 !important;
+            }
+            .qa-ans { display: block !important; }
+            /* 隱藏不想印出來的 UI 元素 */
+            #live-clock, #page-num {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 <body onclick="handleGlobalClick(event)">
@@ -317,7 +345,7 @@
         </div>
     </div>
 
-    <!-- ═══ Slide 6: 環境認知 p.176 ═══ -->
+    <!-- ═══ Slide 7: 環境認知 p.176 ═══ -->
     <div class="slide">
         <div class="watermark">🐰</div>
         <div class="page-memo">p.176</div>
@@ -329,11 +357,11 @@
                 <div class="tile" style="border: 6px solid var(--secondary-color);"><span class="order-tag">3.</span><h3>內部環境</h3><p>文化、制度、領導風格</p></div>
                 <div class="tile" style="border: 6px solid var(--secondary-color);"><span class="order-tag">4.</span><h3>主觀認知</h3><p>資訊知能影響判斷與解讀</p></div>
             </div>
-            <p style="text-align: center; margin-top: 35px; font-weight: 900; font-size: 40px; color: var(--primary-color);">認知能力與水準是競爭力來源。</p>
+            <p style="text-align: center; margin-top: 40px; font-weight: 900; font-size: 40px; color: var(--primary-color);">認知能力與水準是競爭力來源。</p>
         </div>
     </div>
 
-    <!-- ═══ Slide 7: 外部因素 p.176 ═══ -->
+    <!-- ═══ Slide 8: 外部因素 p.176 ═══ -->
     <div class="slide">
         <div class="watermark">🐰</div>
         <div class="page-memo">p.176</div>
@@ -356,7 +384,7 @@
         </div>
     </div>
 
-    <!-- ═══ Slide 8: 內部因素 p.177 ═══ -->
+    <!-- ═══ Slide 9: 內部因素 p.177 ═══ -->
     <div class="slide">
         <div class="watermark">🐰</div>
         <div class="page-memo">p.177</div>
@@ -373,7 +401,7 @@
         </div>
     </div>
 
-    <!-- ═══ Slide 9: 主觀解讀 p.177 ═══ -->
+    <!-- ═══ Slide 10: 主觀解讀 p.177 ═══ -->
     <div class="slide">
         <div class="watermark">🐰</div>
         <div class="page-memo">p.177</div>
@@ -392,7 +420,7 @@
         </div>
     </div>
 
-    <!-- ═══ Slide 10: 分析資訊需求 (合併實例) p.178 ═══ -->
+    <!-- ═══ Slide 11: 分析資訊需求 (合併實例) p.178 ═══ -->
     <div class="slide">
         <div class="watermark">🐰</div>
         <div class="page-memo">p.178</div>
@@ -794,7 +822,7 @@
         </div>
     </div>
 
-    <!-- ═══ Slide 28: 民間數據/尼爾森 p.190-191 (移至此處) ═══ -->
+    <!-- ═══ Slide 28: 民間數據/尼爾森 p.190-191 ═══ -->
     <div class="slide">
         <div class="watermark">🐰</div>
         <div class="page-memo">p.190-191</div>
